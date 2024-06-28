@@ -1,0 +1,11 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: group1_lab1_python 
+- file: group1_lab2_python 
+- file: group1_lab3_python 
+- file: group1_lab4_python
+- file: group1_lab5_python

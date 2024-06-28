@@ -1,0 +1,1373 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Non-Linear Methods DML &#8212; My book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'group1_lab5_python';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="WORKGROUP 4" href="group1_lab4_python.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="group1_lab1_python.html">An inferential problem: The Gender Wage Gap</a></li>
+
+
+<li class="toctree-l1"><a class="reference internal" href="group1_lab2_python.html">Multicollinearity</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="group1_lab3_python.html">Proving Neyman Orthogonality</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="group1_lab4_python.html">WORKGROUP 4</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Non-Linear Methods DML</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgroup1_lab5_python.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/group1_lab5_python.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Non-Linear Methods DML</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Non-Linear Methods DML</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workgroup-5">WORKGROUP 5</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#replication-and-data-analysis-python">Replication and Data analysis - Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptives">1. Descriptives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-analysis">2. Linear Regression analysis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.Non-Linear Methods DML</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#we-now-run-through-dml-using-as-first-stage-models">We now run through DML using as first stage models:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-rlasso">3.1 DML with RLasso:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-regresion-trees">3.2 DML with Regresion Trees:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-boosting-trees">3.3 DML with Boosting Trees:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-regression-forest">3.4 DML with Regression Forest:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-and-plot-with-all-the-results">3.5 Table and plot with all the results:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-method-we-will-choose">3.6 What is the method we will choose?</a></li>
+</ul>
+</li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="non-linear-methods-dml">
+<h1>Non-Linear Methods DML<a class="headerlink" href="#non-linear-methods-dml" title="Link to this heading">#</a></h1>
+<section id="workgroup-5">
+<h2>WORKGROUP 5<a class="headerlink" href="#workgroup-5" title="Link to this heading">#</a></h2>
+<p>Integrantes:</p>
+<ul class="simple">
+<li><p>Valeria Hoyos Macedo</p></li>
+<li><p>Josué Eduardo Maguiña Mezaz</p></li>
+<li><p>Alvaro Alexander Yllu Socualaya</p></li>
+<li><p>Maria pamela Cubas Albujar</p></li>
+</ul>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="replication-and-data-analysis-python">
+<h1>Replication and Data analysis - Python<a class="headerlink" href="#replication-and-data-analysis-python" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import relevant packages</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="kn">import</span> <span class="n">resample</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span><span class="p">,</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">cross_val_predict</span><span class="p">,</span> <span class="n">KFold</span>
+<span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">make_pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LassoCV</span><span class="p">,</span> <span class="n">RidgeCV</span><span class="p">,</span> <span class="n">ElasticNetCV</span><span class="p">,</span> <span class="n">LinearRegression</span><span class="p">,</span> <span class="n">Ridge</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">,</span> <span class="n">LogisticRegressionCV</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span><span class="p">,</span> <span class="n">RandomForestClassifier</span><span class="p">,</span> <span class="n">GradientBoostingRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeRegressor</span>
+<span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">from</span> <span class="nn">econml.sklearn_extensions.linear_model</span> <span class="kn">import</span> <span class="n">WeightedLasso</span>
+<span class="kn">import</span> <span class="nn">patsy</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="c1"># Set random seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">123</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">16</span>
+<span class="g g-Whitespace">     </span><span class="mi">14</span> <span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="ne">---&gt; </span><span class="mi">16</span> <span class="kn">from</span> <span class="nn">econml.sklearn_extensions.linear_model</span> <span class="kn">import</span> <span class="n">WeightedLasso</span>
+<span class="g g-Whitespace">     </span><span class="mi">17</span> <span class="kn">import</span> <span class="nn">patsy</span>
+<span class="g g-Whitespace">     </span><span class="mi">18</span> <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s1">&#39;ignore&#39;</span><span class="p">)</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;econml&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<section id="descriptives">
+<h2>1. Descriptives<a class="headerlink" href="#descriptives" title="Link to this heading">#</a></h2>
+<p>Show tables to describe your main variables. Try to split your analysis between the treated and control groups. You can use a balance table.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Upload data</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/victorcubas/Downloads/processed_esti.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Print data</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   y  w  gender_female  gender_male  gender_transgender  ethnicgrp_asian  \
+0  1  1              0            1                   0                0   
+1  0  0              0            1                   0                0   
+2  0  1              0            1                   0                0   
+3  0  0              1            0                   0                0   
+4  1  1              1            0                   0                1   
+
+   ethnicgrp_black  ethnicgrp_mixed_multiple  ethnicgrp_other  \
+0                0                         1                0   
+1                0                         0                0   
+2                1                         0                0   
+3                0                         0                0   
+4                0                         0                0   
+
+   ethnicgrp_white  partners1  postlaunch  msm  age  imd_decile  
+0                0          0           1    0   27           5  
+1                1          0           0    0   19           6  
+2                0          0           1    0   26           4  
+3                1          1           0    0   20           2  
+4                0          0           1    0   24           3  
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the control data</span>
+<span class="c1"># Select the columns</span>
+<span class="n">Control_antes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_female&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_black&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the Data</span>
+<span class="n">Control</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="n">Control_antes</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Control</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      age  gender_female  ethnicgrp_black
+1      19              0                0
+3      20              1                0
+7      21              0                1
+10     28              0                0
+11     24              1                0
+...   ...            ...              ...
+1729   27              1                0
+1730   19              1                0
+1731   20              1                0
+1733   26              0                1
+1734   24              0                0
+
+[818 rows x 3 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Create the treatment data</span>
+<span class="c1"># Select the columns</span>
+<span class="n">Tratamiento_antes</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_female&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_black&#39;</span><span class="p">]</span>
+
+<span class="c1"># Filter the Data</span>
+<span class="n">Tratamiento</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="n">Tratamiento_antes</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">Tratamiento</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>      age  gender_female  ethnicgrp_black
+0      27              0                0
+2      26              0                1
+4      24              1                0
+5      24              0                0
+6      24              1                0
+...   ...            ...              ...
+1732   26              1                0
+1735   29              1                1
+1736   27              1                0
+1737   25              1                0
+1738   25              1                0
+
+[921 rows x 3 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># DataFrames</span>
+<span class="n">df_control</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Control</span><span class="p">)</span>
+<span class="n">df_tratamiento</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Tratamiento</span><span class="p">)</span>
+
+<span class="c1"># Calculate the number of observations, mean and sd</span>
+<span class="n">num_obs_control</span> <span class="o">=</span> <span class="n">df_control</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">num_obs_tratamiento</span> <span class="o">=</span> <span class="n">df_tratamiento</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">mean_control</span> <span class="o">=</span> <span class="n">df_control</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_tratamiento</span> <span class="o">=</span> <span class="n">df_tratamiento</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">dsv_control</span> <span class="o">=</span> <span class="n">df_tratamiento</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">dsv_tratamiento</span> <span class="o">=</span> <span class="n">df_tratamiento</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">diferencia</span> <span class="o">=</span> <span class="n">mean_tratamiento</span> <span class="o">-</span> <span class="n">mean_control</span>
+
+<span class="c1"># Create a DataFrame with the results</span>
+<span class="n">tabla_diferencias</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;n (Control)&#39;</span><span class="p">:</span> <span class="n">num_obs_control</span><span class="p">,</span>
+    <span class="s1">&#39;mean(Control)&#39;</span><span class="p">:</span> <span class="n">mean_control</span><span class="p">,</span>
+    <span class="s1">&#39;sd (Control)&#39;</span><span class="p">:</span> <span class="n">dsv_control</span><span class="p">,</span>
+    <span class="s1">&#39;n (Tratamiento)&#39;</span><span class="p">:</span> <span class="n">num_obs_tratamiento</span><span class="p">,</span>
+    <span class="s1">&#39;mean (Tratamiento)&#39;</span><span class="p">:</span> <span class="n">mean_tratamiento</span><span class="p">,</span>
+    <span class="s1">&#39;sd (Tratamiento)&#39;</span><span class="p">:</span> <span class="n">dsv_tratamiento</span><span class="p">,</span>
+    <span class="s1">&#39;Diff&#39;</span><span class="p">:</span> <span class="n">diferencia</span>
+<span class="p">})</span>
+
+<span class="c1"># Show the table</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tabla_diferencias</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">float_format</span><span class="o">=</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                 n (Control)  mean(Control)  sd (Control)  n (Tratamiento)  mean (Tratamiento)  sd (Tratamiento)  Diff
+age                      818          23.05          3.54              921               23.16              3.54  0.11
+gender_female            818           0.58          0.49              921                0.59              0.49  0.01
+ethnicgrp_black          818           0.09          0.27              921                0.08              0.27 -0.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show graphs that help to describe your variables. Try to split your analysis between the treated and control groups.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_female&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_male&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_black&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_transgender&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_asian&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_mixed_multiple&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_other&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_white&#39;</span><span class="p">,</span> <span class="s1">&#39;partners1&#39;</span><span class="p">,</span> <span class="s1">&#39;postlaunch&#39;</span><span class="p">,</span> <span class="s1">&#39;msm&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot histogram</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">]:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">kde</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Histogram of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/victorcubas/Downloads/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+</pre></div>
+</div>
+<img alt="_images/23fa8ae54cd9291d1c5c7b376f9a65ac922e4866714aabe5370d3d90acbe43fa.png" src="_images/23fa8ae54cd9291d1c5c7b376f9a65ac922e4866714aabe5370d3d90acbe43fa.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot boxplots for each variable split by treatment</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">col</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Bar Plot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">col</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Frequency&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/54954875ad36fbb5a3f9d5f1ff0affcaec375374ce6b78da048d6c153734bbf6.png" src="_images/54954875ad36fbb5a3f9d5f1ff0affcaec375374ce6b78da048d6c153734bbf6.png" />
+<img alt="_images/e526dad1c3c52521341e4e5c335bf696bfaa94c2c480ebf66e19ea335d808c20.png" src="_images/e526dad1c3c52521341e4e5c335bf696bfaa94c2c480ebf66e19ea335d808c20.png" />
+<img alt="_images/69cdfbdbcad1c99c406b7cb4499153ff5d4ee787583d96e85ad830b126207f81.png" src="_images/69cdfbdbcad1c99c406b7cb4499153ff5d4ee787583d96e85ad830b126207f81.png" />
+<img alt="_images/e826155934c15a51b014cb0790d4ee4e46f2a7907f4e285bc5a3e7be185156ab.png" src="_images/e826155934c15a51b014cb0790d4ee4e46f2a7907f4e285bc5a3e7be185156ab.png" />
+<img alt="_images/7df363d8e40f92b63e5e9d91f78d90c77adfe736d7b00783285628e2f3d4a7ce.png" src="_images/7df363d8e40f92b63e5e9d91f78d90c77adfe736d7b00783285628e2f3d4a7ce.png" />
+<img alt="_images/0e1797b7d0961021bab11201e0841f724fe7278e30410310a15b95899ba931c9.png" src="_images/0e1797b7d0961021bab11201e0841f724fe7278e30410310a15b95899ba931c9.png" />
+<img alt="_images/fb8e83d6ed91ca4f2c591972241d0472bf621a0a3b5874ba267736c3ec003f80.png" src="_images/fb8e83d6ed91ca4f2c591972241d0472bf621a0a3b5874ba267736c3ec003f80.png" />
+<img alt="_images/4e0678e58cc3e2d1bd58b6366cab06307a7790adb5b8f0d8d6da18963b8b73bd.png" src="_images/4e0678e58cc3e2d1bd58b6366cab06307a7790adb5b8f0d8d6da18963b8b73bd.png" />
+<img alt="_images/c9e1365eee0c14789c19a5da3904e3364cf8f8a06d3b76918470199a073792dd.png" src="_images/c9e1365eee0c14789c19a5da3904e3364cf8f8a06d3b76918470199a073792dd.png" />
+<img alt="_images/9f6ba2dcb25632bd26b7dce4d96cf64dce10a60c17af4e2a1845db5d361f5df5.png" src="_images/9f6ba2dcb25632bd26b7dce4d96cf64dce10a60c17af4e2a1845db5d361f5df5.png" />
+<img alt="_images/3bb14a499107f090fb999beac4e2c95934938088486483390a97372453443338.png" src="_images/3bb14a499107f090fb999beac4e2c95934938088486483390a97372453443338.png" />
+<img alt="_images/470723546cad3887c7ba182e3951f7ad8227a1a36e6cc2952b5f260016c1ca8a.png" src="_images/470723546cad3887c7ba182e3951f7ad8227a1a36e6cc2952b5f260016c1ca8a.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function to create a stacked bar plot</span>
+<span class="k">def</span> <span class="nf">stacked_bar_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">):</span>
+    <span class="n">counts</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">col</span><span class="p">])</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">stacked</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Stacked Bar Plot of </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s1"> by Treatment&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Treatment&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Count&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Plot stacked bar plots for each dummy variable</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">columns</span><span class="p">:</span>
+    <span class="n">stacked_bar_plot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">col</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/356d032c9ea05c0f380b94a0353bb5bb59f419bf40b466f678125d4c8ea95b8d.png" src="_images/356d032c9ea05c0f380b94a0353bb5bb59f419bf40b466f678125d4c8ea95b8d.png" />
+<img alt="_images/2324efd8ebda3ef0d8e335ea0aa79a5817b147cde3bffb6fc4456cf8a8e32ed1.png" src="_images/2324efd8ebda3ef0d8e335ea0aa79a5817b147cde3bffb6fc4456cf8a8e32ed1.png" />
+<img alt="_images/32f4cb09e5a760450e01686c891304e5cc8eb2c109441058c0f0aa9c0258567b.png" src="_images/32f4cb09e5a760450e01686c891304e5cc8eb2c109441058c0f0aa9c0258567b.png" />
+<img alt="_images/2509ed1dc8ff17194b46f54410bd8bff5e08fdf5ee624a9ca987f247f048dc1b.png" src="_images/2509ed1dc8ff17194b46f54410bd8bff5e08fdf5ee624a9ca987f247f048dc1b.png" />
+<img alt="_images/97b02a3004036560bcb5f0d069360e78c0b0de8cbfce3c8c7ada257c74d0c14d.png" src="_images/97b02a3004036560bcb5f0d069360e78c0b0de8cbfce3c8c7ada257c74d0c14d.png" />
+<img alt="_images/756d680e24c2985c5fbccb060ed4670b57639d8e9ac4b1fe3b88d694fe7882b1.png" src="_images/756d680e24c2985c5fbccb060ed4670b57639d8e9ac4b1fe3b88d694fe7882b1.png" />
+<img alt="_images/d0756e553473564bd4d0da7d3e4d7f89d0102968bf91e673b30108fe09d67a85.png" src="_images/d0756e553473564bd4d0da7d3e4d7f89d0102968bf91e673b30108fe09d67a85.png" />
+<img alt="_images/a21d1ed967f66f69e9e0ef67865d87d4f6fe9cc7e8bcb28dc6a1a4f0aebad7ef.png" src="_images/a21d1ed967f66f69e9e0ef67865d87d4f6fe9cc7e8bcb28dc6a1a4f0aebad7ef.png" />
+<img alt="_images/b34807d07f888fb9cc7056d25220f4348d552808d28a1db907f3f767ab27383b.png" src="_images/b34807d07f888fb9cc7056d25220f4348d552808d28a1db907f3f767ab27383b.png" />
+<img alt="_images/894551905e248774bf3a4e6686f410ddf3e22a8fdc58568e8c9c4fb4a1d6105b.png" src="_images/894551905e248774bf3a4e6686f410ddf3e22a8fdc58568e8c9c4fb4a1d6105b.png" />
+<img alt="_images/966d9f755f7f78d1fb1eacb953dd92d88dc6ba9fa3f00c2ee0036249786c4c88.png" src="_images/966d9f755f7f78d1fb1eacb953dd92d88dc6ba9fa3f00c2ee0036249786c4c88.png" />
+<img alt="_images/1ec6b578d7e69009d6ef8e59d2840d3bf3462206738c8296c6deb4e5a28f676d.png" src="_images/1ec6b578d7e69009d6ef8e59d2840d3bf3462206738c8296c6deb4e5a28f676d.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Pairplot for dummy variables colored by treatment</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nb">vars</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;gender_female&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_male&#39;</span><span class="p">,</span> <span class="s1">&#39;ethnicgrp_black&#39;</span><span class="p">,</span><span class="s1">&#39;gender_transgender&#39;</span><span class="p">],</span> <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;scatter&#39;</span><span class="p">,</span> <span class="n">diag_kind</span><span class="o">=</span><span class="s1">&#39;kde&#39;</span><span class="p">,</span> <span class="n">palette</span><span class="o">=</span><span class="s1">&#39;coolwarm&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s1">&#39;Pairplot of Dummy Variables by Treatment&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.02</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/victorcubas/Downloads/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+/Users/victorcubas/Downloads/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+/Users/victorcubas/Downloads/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+/Users/victorcubas/Downloads/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+/Users/victorcubas/Downloads/anaconda3/lib/python3.11/site-packages/seaborn/_oldcore.py:1119: FutureWarning: use_inf_as_na option is deprecated and will be removed in a future version. Convert inf values to NaN before operating instead.
+  with pd.option_context(&#39;mode.use_inf_as_na&#39;, True):
+</pre></div>
+</div>
+<img alt="_images/064d7c459bf1c22c09ee8d1015d0c75df01b78637dba33d88a37ddf7b792442a.png" src="_images/064d7c459bf1c22c09ee8d1015d0c75df01b78637dba33d88a37ddf7b792442a.png" />
+</div>
+</div>
+</section>
+<section id="linear-regression-analysis">
+<h2>2. Linear Regression analysis<a class="headerlink" href="#linear-regression-analysis" title="Link to this heading">#</a></h2>
+<p>Run the next regression Y ~ T . Please show a clear table output and interpret the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run the regression Y ~ T</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;y ~ w&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Print the summary of the regression</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.077
+Model:                            OLS   Adj. R-squared:                  0.076
+Method:                 Least Squares   F-statistic:                     144.5
+Date:                Sat, 15 Jun 2024   Prob (F-statistic):           4.96e-32
+Time:                        20:45:38   Log-Likelihood:                -1112.9
+No. Observations:                1739   AIC:                             2230.
+Df Residuals:                    1737   BIC:                             2241.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      0.2115      0.016     13.174      0.000       0.180       0.243
+w              0.2652      0.022     12.021      0.000       0.222       0.308
+==============================================================================
+Omnibus:                    38241.926   Durbin-Watson:                   1.995
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              217.327
+Skew:                           0.532   Prob(JB):                     6.43e-48
+Kurtosis:                       1.634   Cond. No.                         2.69
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interpretation: There is a significant (p&lt;0.05) and positive effect of the treatment on the outcome. The probability that Y is equal to 1 increases by 26.52 percentage points when w=1, compared to w=0. However, there is omitted variable bias because only outocme was regressed with treatment.</p>
+<p>Run the regression Y ~ T + X (any variables of your preference). Please show a clear table output and interpret the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the formula for the regression</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;y ~ w + age + gender_female + gender_male + ethnicgrp_black + gender_transgender + msm&#39;</span>
+
+<span class="c1"># Run the regression Y ~ T+ X (any variables of your preference)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Print the summary of the regression</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                      y   R-squared:                       0.101
+Model:                            OLS   Adj. R-squared:                  0.098
+Method:                 Least Squares   F-statistic:                     32.50
+Date:                Sat, 15 Jun 2024   Prob (F-statistic):           2.96e-37
+Time:                        20:45:38   Log-Likelihood:                -1089.6
+No. Observations:                1739   AIC:                             2193.
+Df Residuals:                    1732   BIC:                             2231.
+Df Model:                           6                                         
+Covariance Type:            nonrobust                                         
+======================================================================================
+                         coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------------
+Intercept             -0.0343      0.078     -0.441      0.659      -0.187       0.118
+w                      0.2613      0.022     11.977      0.000       0.219       0.304
+age                    0.0165      0.003      5.333      0.000       0.010       0.023
+gender_female         -0.0936      0.061     -1.535      0.125      -0.213       0.026
+gender_male           -0.1827      0.062     -2.939      0.003      -0.305      -0.061
+ethnicgrp_black       -0.0664      0.039     -1.705      0.088      -0.143       0.010
+gender_transgender     0.2421      0.171      1.417      0.157      -0.093       0.577
+msm                    0.0177      0.037      0.483      0.629      -0.054       0.090
+==============================================================================
+Omnibus:                     2967.878   Durbin-Watson:                   1.989
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              199.443
+Skew:                           0.533   Prob(JB):                     4.92e-44
+Kurtosis:                       1.729   Cond. No.                     1.14e+17
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The smallest eigenvalue is 7.34e-29. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
+</pre></div>
+</div>
+</div>
+</div>
+<p>Interpretation: There is a significant (p&lt;0.05) and positive effect of the treatment on the outcome. The probability that Y is equal to 1 increases by 26.11 percentage points when w=1, compared to w=0. Likewise, the other variables that were significant are age and male with a significance level of 0.05.</p>
+<p>Use the Double Lasso Method to estimate Y ~ T + X. Please show a clear table output and interpret the results.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the treatment, outcome, and covariates</span>
+<span class="n">T</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">]</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s1">&#39;age&#39;</span><span class="p">,</span><span class="s1">&#39;gender_female&#39;</span><span class="p">,</span> <span class="s1">&#39;gender_male&#39;</span><span class="p">,</span><span class="s1">&#39;ethnicgrp_black&#39;</span><span class="p">,</span><span class="s1">&#39;gender_transgender&#39;</span><span class="p">,</span> <span class="s1">&#39;msm&#39;</span><span class="p">]]</span>
+
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">selected_covariates</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">lasso_Y</span> <span class="o">=</span> <span class="n">WeightedLasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">lasso</span><span class="o">.</span><span class="n">alpha_</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">selected_covariates</span><span class="p">],</span> <span class="n">Y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+
+<span class="c1"># Print the coefficients</span>
+<span class="n">coefficients</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;Feature&#39;</span><span class="p">:</span> <span class="n">selected_covariates</span><span class="p">,</span> <span class="s1">&#39;Coefficient&#39;</span><span class="p">:</span> <span class="n">lasso_Y</span><span class="o">.</span><span class="n">coef_</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">coefficients</span><span class="p">)</span>
+
+<span class="c1"># Calculate the treatment effect</span>
+<span class="n">treatment_effect</span> <span class="o">=</span> <span class="n">lasso_Y</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Treatment Effect: </span><span class="si">{</span><span class="n">treatment_effect</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Feature  Coefficient
+0     age     0.021871
+Treatment Effect: 0.021871246877642546
+</pre></div>
+</div>
+</div>
+</div>
+<p>Show All the coefficients from T in a figure and compare. You should have three coefficients from the three coefficients above.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model_ols_no_X</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;y ~ w&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">coef_ols_no_X</span> <span class="o">=</span> <span class="n">model_ols_no_X</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span>
+
+<span class="n">model_ols_with_X</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;y ~ w + age + gender_female + gender_male + ethnicgrp_black + gender_transgender + msm&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">coef_ols_with_X</span> <span class="o">=</span> <span class="n">model_ols_with_X</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s1">&#39;w&#39;</span><span class="p">]</span>
+
+<span class="n">lasso</span> <span class="o">=</span> <span class="n">LassoCV</span><span class="p">(</span><span class="n">cv</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+<span class="n">selected_covariates</span> <span class="o">=</span> <span class="n">X</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="n">lasso</span><span class="o">.</span><span class="n">coef_</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">lasso_Y</span> <span class="o">=</span> <span class="n">WeightedLasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="n">lasso</span><span class="o">.</span><span class="n">alpha_</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">selected_covariates</span><span class="p">],</span> <span class="n">Y</span><span class="p">,</span> <span class="n">sample_weight</span><span class="o">=</span><span class="n">T</span><span class="p">)</span>
+<span class="n">coef_double_lasso</span> <span class="o">=</span> <span class="n">lasso_Y</span><span class="o">.</span><span class="n">coef_</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coef_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s1">&#39;Method&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;OLS without X&#39;</span><span class="p">,</span> <span class="s1">&#39;OLS with X&#39;</span><span class="p">,</span> <span class="s1">&#39;Double Lasso&#39;</span><span class="p">],</span>
+    <span class="s1">&#39;Treatment Coefficient&#39;</span><span class="p">:</span> <span class="p">[</span><span class="n">coef_ols_no_X</span><span class="p">,</span> <span class="n">coef_ols_with_X</span><span class="p">,</span> <span class="n">coef_double_lasso</span><span class="p">]</span>
+<span class="p">})</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">coef_df</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Method  Treatment Coefficient
+0  OLS without X               0.265164
+1     OLS with X               0.261294
+2   Double Lasso               0.021871
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>multiprocess
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>pyreadr
+<span class="o">!</span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/maxhuppertz/hdmpy.git
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: multiprocess in c:\users\josue\anaconda3\lib\site-packages (0.70.16)
+Requirement already satisfied: dill&gt;=0.3.8 in c:\users\josue\anaconda3\lib\site-packages (from multiprocess) (0.3.8)
+Requirement already satisfied: pyreadr in c:\users\josue\anaconda3\lib\site-packages (0.5.0)
+Requirement already satisfied: pandas&gt;=1.2.0 in c:\users\josue\anaconda3\lib\site-packages (from pyreadr) (2.1.4)
+Requirement already satisfied: numpy&lt;2,&gt;=1.23.2 in c:\users\josue\anaconda3\lib\site-packages (from pandas&gt;=1.2.0-&gt;pyreadr) (1.26.4)
+Requirement already satisfied: python-dateutil&gt;=2.8.2 in c:\users\josue\anaconda3\lib\site-packages (from pandas&gt;=1.2.0-&gt;pyreadr) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in c:\users\josue\anaconda3\lib\site-packages (from pandas&gt;=1.2.0-&gt;pyreadr) (2023.3.post1)
+Requirement already satisfied: tzdata&gt;=2022.1 in c:\users\josue\anaconda3\lib\site-packages (from pandas&gt;=1.2.0-&gt;pyreadr) (2023.3)
+Requirement already satisfied: six&gt;=1.5 in c:\users\josue\anaconda3\lib\site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas&gt;=1.2.0-&gt;pyreadr) (1.16.0)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Cloning into &#39;hdmpy&#39;...
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;./hdmpy&quot;</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">hdmpy</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>3.Non-Linear Methods DML<a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://github.com/gsbDBI/ExperimentData/raw/97a11199ba559f01c7b3803a1493ffa08631732e/eSTI/processed_data/processed_esti.csv&quot;</span><span class="p">)</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">&#39;intercept&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># some summary statistics</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The length of y is: &quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The number of features in x is: &quot;</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+<span class="n">all_columns</span> <span class="o">=</span> <span class="s2">&quot;+&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+<span class="n">all_columns</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>The length of y is:  1739
+The number of features in x is:  13
+</pre></div>
+</div>
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;gender_female+gender_male+gender_transgender+ethnicgrp_asian+ethnicgrp_black+ethnicgrp_mixed_multiple+ethnicgrp_other+ethnicgrp_white+partners1+postlaunch+msm+age+imd_decile+intercept&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">dml</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">nfolds</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">time</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">clu</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+
+    <span class="n">cv</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="n">nfolds</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span> <span class="c1"># shuffled k-folds</span>
+    <span class="n">yhat</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">modely</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># out-of-fold predictions for y</span>
+    <span class="c1"># out-of-fold predictions for D</span>
+    <span class="c1"># use predict or predict_proba dependent on classifier or regressor for D</span>
+    <span class="k">if</span> <span class="n">classifier</span><span class="p">:</span>
+        <span class="n">Dhat</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">modeld</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s1">&#39;predict_proba&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)[:,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Dhat</span> <span class="o">=</span> <span class="n">cross_val_predict</span><span class="p">(</span><span class="n">modeld</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">cv</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># calculate outcome and treatment residuals</span>
+    <span class="n">resy</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">yhat</span>
+    <span class="n">resD</span> <span class="o">=</span> <span class="n">D</span> <span class="o">-</span> <span class="n">Dhat</span>
+
+    <span class="k">if</span> <span class="n">cluster</span><span class="p">:</span>
+      <span class="c1"># final stage ols clustered</span>
+      <span class="n">dml_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">clu</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">time</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">resy</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;resy&#39;</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">resD</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;resD&#39;</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># final stage ols nonclustered</span>
+      <span class="n">dml_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">resy</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;resy&#39;</span><span class="p">),</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">resD</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;resD&#39;</span><span class="p">)],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">cluster</span><span class="p">:</span>
+      <span class="c1"># clustered standard errors</span>
+      <span class="n">ols_mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;resy ~ 1 + resD&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dml_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cov_type</span><span class="o">=</span><span class="s1">&#39;cluster&#39;</span><span class="p">,</span> <span class="n">cov_kwds</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;groups&quot;</span><span class="p">:</span> <span class="n">dml_data</span><span class="p">[</span><span class="s1">&#39;CountyCode&#39;</span><span class="p">]})</span>
+
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># regular ols</span>
+      <span class="n">ols_mod</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula</span> <span class="o">=</span> <span class="s1">&#39;resy ~ 1 + resD&#39;</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">dml_data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+    <span class="n">point</span> <span class="o">=</span> <span class="n">ols_mod</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">stderr</span> <span class="o">=</span> <span class="n">ols_mod</span><span class="o">.</span><span class="n">bse</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">epsilon</span> <span class="o">=</span> <span class="n">ols_mod</span><span class="o">.</span><span class="n">resid</span>
+
+    <span class="k">return</span> <span class="n">point</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">Dhat</span><span class="p">,</span> <span class="n">resy</span><span class="p">,</span> <span class="n">resD</span><span class="p">,</span> <span class="n">epsilon</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summary</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">stderr</span><span class="p">,</span> <span class="n">yhat</span><span class="p">,</span> <span class="n">Dhat</span><span class="p">,</span> <span class="n">resy</span><span class="p">,</span> <span class="n">resD</span><span class="p">,</span> <span class="n">epsilon</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">D</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Convenience summary function that takes the results of the DML function</span>
+<span class="sd">    and summarizes several estimation quantities and performance metrics.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s1">&#39;estimate&#39;</span><span class="p">:</span> <span class="n">point</span><span class="p">,</span> <span class="c1"># point estimate</span>
+                         <span class="s1">&#39;stderr&#39;</span><span class="p">:</span> <span class="n">stderr</span><span class="p">,</span> <span class="c1"># standard error</span>
+                         <span class="s1">&#39;lower&#39;</span><span class="p">:</span> <span class="n">point</span> <span class="o">-</span> <span class="mf">1.96</span><span class="o">*</span><span class="n">stderr</span><span class="p">,</span> <span class="c1"># lower end of 95% confidence interval</span>
+                         <span class="s1">&#39;upper&#39;</span><span class="p">:</span> <span class="n">point</span> <span class="o">+</span> <span class="mf">1.96</span><span class="o">*</span><span class="n">stderr</span><span class="p">,</span> <span class="c1"># upper end of 95% confidence interval</span>
+                         <span class="s1">&#39;rmse y&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">resy</span><span class="o">**</span><span class="mi">2</span><span class="p">)),</span> <span class="c1"># RMSE of model that predicts outcome y</span>
+                         <span class="s1">&#39;rmse D&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">resD</span><span class="o">**</span><span class="mi">2</span><span class="p">))</span> <span class="c1"># RMSE of model that predicts treatment D</span>
+                         <span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;y&quot;</span><span class="p">]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;w&quot;</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="o">~</span><span class="n">data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">&#39;y&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">])]]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="we-now-run-through-dml-using-as-first-stage-models">
+<h1>We now run through DML using as first stage models:<a class="headerlink" href="#we-now-run-through-dml-using-as-first-stage-models" title="Link to this heading">#</a></h1>
+<ul class="simple">
+<li><p>Robust Lasso</p></li>
+<li><p>Regression Trees</p></li>
+<li><p>Boosting Trees</p></li>
+<li><p>Regression Forest</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># DML with OLS:</span>
+<span class="n">modely</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">LinearRegression</span><span class="p">())</span>
+<span class="n">modeld</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">LinearRegression</span><span class="p">())</span>
+<span class="n">result_OLS</span> <span class="o">=</span> <span class="n">dml</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">table_OLS</span> <span class="o">=</span> <span class="n">summary</span><span class="p">(</span><span class="o">*</span><span class="n">result_OLS</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;OLS&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_OLS</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     estimate    stderr     lower    upper    rmse y   rmse D
+OLS  0.261983  0.021667  0.219516  0.30445  0.472325  0.50234
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">RLasso</span><span class="p">(</span><span class="n">BaseEstimator</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">post</span> <span class="o">=</span> <span class="n">post</span>
+
+    <span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rlasso_</span> <span class="o">=</span> <span class="n">hdmpy</span><span class="o">.</span><span class="n">rlasso</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">post</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">post</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">X</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rlasso_</span><span class="o">.</span><span class="n">est</span><span class="p">[</span><span class="s1">&#39;beta&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rlasso_</span><span class="o">.</span><span class="n">est</span><span class="p">[</span><span class="s1">&#39;intercept&#39;</span><span class="p">])</span>
+
+<span class="n">lasso_model</span> <span class="o">=</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">RLasso</span><span class="p">(</span><span class="n">post</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="dml-with-rlasso">
+<h2>3.1 DML with RLasso:<a class="headerlink" href="#dml-with-rlasso" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modely</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">RLasso</span><span class="p">(</span><span class="n">post</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">modeld</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">RLasso</span><span class="p">(</span><span class="n">post</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">result_RLasso</span> <span class="o">=</span> <span class="n">dml</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">table_RLasso</span> <span class="o">=</span> <span class="n">summary</span><span class="p">(</span><span class="o">*</span><span class="n">result_RLasso</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Lasso&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_RLasso</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       estimate    stderr     lower     upper    rmse y    rmse D
+Lasso  0.259067  0.021722  0.216492  0.301642  0.471041  0.500225
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dml-with-regresion-trees">
+<h2>3.2 DML with Regresion Trees:<a class="headerlink" href="#dml-with-regresion-trees" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modely</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">ccp_alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">modeld</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">ccp_alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">result_RT</span> <span class="o">=</span> <span class="n">dml</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">table_RT</span><span class="o">=</span> <span class="n">summary</span><span class="p">(</span><span class="o">*</span><span class="n">result_RT</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;RT&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_RT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    estimate    stderr     lower     upper    rmse y    rmse D
+RT  0.249831  0.021872  0.206961  0.292701  0.472259  0.499638
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dml-with-boosting-trees">
+<h2>3.3 DML with Boosting Trees:<a class="headerlink" href="#dml-with-boosting-trees" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modely</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">modeld</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">GradientBoostingRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">max_depth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">result_GBT</span> <span class="o">=</span> <span class="n">dml</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">table_GBT</span> <span class="o">=</span> <span class="n">summary</span><span class="p">(</span><span class="o">*</span><span class="n">result_GBT</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;GBT&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_GBT</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>     estimate    stderr     lower     upper    rmse y    rmse D
+GBT  0.246373  0.021669  0.203902  0.288843  0.475893  0.508383
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="dml-with-regression-forest">
+<h2>3.4 DML with Regression Forest:<a class="headerlink" href="#dml-with-regression-forest" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modely</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">modeld</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">result_RF</span> <span class="o">=</span> <span class="n">dml</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">table_RF</span> <span class="o">=</span> <span class="n">summary</span><span class="p">(</span><span class="o">*</span><span class="n">result_RF</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;RF&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_RF</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>    estimate    stderr     lower     upper    rmse y    rmse D
+RF  0.241558  0.021379  0.199655  0.283461  0.472297  0.511585
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="table-and-plot-with-all-the-results">
+<h2>3.5 Table and plot with all the results:<a class="headerlink" href="#table-and-plot-with-all-the-results" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span> <span class="n">table_OLS</span><span class="p">,</span> <span class="n">table_RLasso</span><span class="p">,</span> <span class="n">table_RT</span><span class="p">,</span> <span class="n">table_GBT</span><span class="p">,</span> <span class="n">table_RF</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>       estimate    stderr     lower     upper    rmse y    rmse D
+OLS    0.261983  0.021667  0.219516  0.304450  0.472325  0.502340
+Lasso  0.259067  0.021722  0.216492  0.301642  0.471041  0.500225
+RT     0.249831  0.021872  0.206961  0.292701  0.472259  0.499638
+GBT    0.246373  0.021669  0.203902  0.288843  0.475893  0.508383
+RF     0.241558  0.021379  0.199655  0.283461  0.472297  0.511585
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">errorbar</span><span class="p">(</span><span class="n">table</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;estimate&#39;</span><span class="p">],</span> 
+             <span class="n">yerr</span><span class="o">=</span><span class="p">[</span><span class="n">table</span><span class="p">[</span><span class="s1">&#39;estimate&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;lower&#39;</span><span class="p">],</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;upper&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">table</span><span class="p">[</span><span class="s1">&#39;estimate&#39;</span><span class="p">]],</span> 
+             <span class="n">fmt</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">capsize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Model&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Estimate of T&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Estimates of T with 95% Confidence Intervals&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/7ec86bdeff67b166a0c541d8c4f0f7ebc556c330b7d2d4232038393c53da0520.png" src="_images/7ec86bdeff67b166a0c541d8c4f0f7ebc556c330b7d2d4232038393c53da0520.png" />
+</div>
+</div>
+</section>
+<section id="what-is-the-method-we-will-choose">
+<h2>3.6 What is the method we will choose?<a class="headerlink" href="#what-is-the-method-we-will-choose" title="Link to this heading">#</a></h2>
+<p>It seems that the best method for predicting D is the regression tree, and the best method for predicting Y is the robust Lasso because they have the smallest RMSE. Using both models, the result shows that the treated group used some type of STI test 25% more compared to the control group.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">modely</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">RLasso</span><span class="p">(</span><span class="n">post</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+<span class="n">modeld</span> <span class="o">=</span> <span class="n">make_pipeline</span><span class="p">(</span><span class="n">StandardScaler</span><span class="p">(),</span> <span class="n">DecisionTreeRegressor</span><span class="p">(</span><span class="n">ccp_alpha</span><span class="o">=</span><span class="mf">0.001</span><span class="p">,</span> <span class="n">min_samples_leaf</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">))</span>
+<span class="n">result_bestmethod</span> <span class="o">=</span> <span class="n">dml</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">modely</span><span class="p">,</span> <span class="n">modeld</span><span class="p">,</span> <span class="n">nfolds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">classifier</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cluster</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">table_bestmethod</span> <span class="o">=</span> <span class="n">summary</span><span class="p">(</span><span class="o">*</span><span class="n">result_bestmethod</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;Best method&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table_bestmethod</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>             estimate    stderr     lower     upper    rmse y    rmse D
+Best method  0.255387  0.021775  0.212709  0.298066  0.471041  0.499638
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="group1_lab4_python.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">WORKGROUP 4</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Non-Linear Methods DML</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#workgroup-5">WORKGROUP 5</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#replication-and-data-analysis-python">Replication and Data analysis - Python</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#descriptives">1. Descriptives</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#linear-regression-analysis">2. Linear Regression analysis</a></li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">3.Non-Linear Methods DML</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#we-now-run-through-dml-using-as-first-stage-models">We now run through DML using as first stage models:</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-rlasso">3.1 DML with RLasso:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-regresion-trees">3.2 DML with Regresion Trees:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-boosting-trees">3.3 DML with Boosting Trees:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dml-with-regression-forest">3.4 DML with Regression Forest:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#table-and-plot-with-all-the-results">3.5 Table and plot with all the results:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-the-method-we-will-choose">3.6 What is the method we will choose?</a></li>
+</ul>
+</li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Josue Maguiña
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

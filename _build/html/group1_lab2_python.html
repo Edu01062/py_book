@@ -1,0 +1,2230 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Multicollinearity &#8212; My book</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=b76e3c8a" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'group1_lab2_python';</script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Proving Neyman Orthogonality" href="group1_lab3_python.html" />
+    <link rel="prev" title="An inferential problem: The Gender Wage Gap" href="group1_lab1_python.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="_static/logo.png" class="logo__image only-light" alt="My book - Home"/>
+    <script>document.write(`<img src="_static/logo.png" class="logo__image only-dark" alt="My book - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="intro.html">
+                    Introduction
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="group1_lab1_python.html">An inferential problem: The Gender Wage Gap</a></li>
+
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Multicollinearity</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="group1_lab3_python.html">Proving Neyman Orthogonality</a></li>
+
+
+
+
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="group1_lab4_python.html">WORKGROUP 4</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="group1_lab5_python.html">Non-Linear Methods DML</a></li>
+
+
+
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fgroup1_lab2_python.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/group1_lab2_python.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Multicollinearity</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Multicollinearity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-explanation">Mathematical Explanation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-equation">Normal Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-mathbf-x-mathbf-x-becomes-non-invertible">Why <span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span> Becomes Non-invertible</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-mathbf-x-mathbf-x">Covariance Matrix (<span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-invertibility">Testing for invertibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-crash-course-in-good-and-bad-controls">A Crash Course in Good and Bad Controls</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="ch">#!pip install numpy pandas statsmodels causalgraphicalmodels pyreadr</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span><span class="o">,</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="kn">import</span> <span class="nn">sympy</span><span class="o">,</span> <span class="nn">matplotlib</span><span class="o">,</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">networkx</span>
+<span class="kn">from</span> <span class="nn">causalgraphicalmodels</span> <span class="kn">import</span> <span class="n">CausalGraphicalModel</span>
+<span class="kn">from</span> <span class="nn">statsmodels.iolib.summary2</span> <span class="kn">import</span> <span class="n">summary_col</span>
+<span class="kn">import</span> <span class="nn">pyreadr</span>
+<span class="kn">import</span> <span class="nn">patsy</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ImportError</span><span class="g g-Whitespace">                               </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span><span class="o">,</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span><span class="o">,</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">sympy</span><span class="o">,</span> <span class="nn">matplotlib</span><span class="o">,</span> <span class="nn">math</span><span class="o">,</span> <span class="nn">random</span><span class="o">,</span> <span class="nn">networkx</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">causalgraphicalmodels</span> <span class="kn">import</span> <span class="n">CausalGraphicalModel</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">statsmodels.iolib.summary2</span> <span class="kn">import</span> <span class="n">summary_col</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="kn">import</span> <span class="nn">pyreadr</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">causalgraphicalmodels</span>\<span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">causalgraphicalmodels.cgm</span> <span class="kn">import</span> <span class="n">CausalGraphicalModel</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span> <span class="nn">causalgraphicalmodels.csm</span> <span class="kn">import</span> <span class="n">StructuralCausalModel</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span> <span class="nn">causalgraphicalmodels.examples</span> <span class="k">as</span> <span class="nn">examples</span>
+
+<span class="n">File</span> <span class="o">~</span>\<span class="n">anaconda3</span>\<span class="n">Lib</span>\<span class="n">site</span><span class="o">-</span><span class="n">packages</span>\<span class="n">causalgraphicalmodels</span>\<span class="n">cgm</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">4</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span> <span class="nn">graphviz</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations</span><span class="p">,</span> <span class="n">chain</span>
+<span class="ne">----&gt; </span><span class="mi">4</span> <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Iterable</span>
+<span class="g g-Whitespace">      </span><span class="mi">7</span> <span class="k">class</span> <span class="nc">CausalGraphicalModel</span><span class="p">:</span>
+<span class="g g-Whitespace">      </span><span class="mi">8</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">      </span><span class="mi">9</span><span class="sd">     Causal Graphical Models</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span><span class="sd">     &quot;&quot;&quot;</span>
+
+<span class="ne">ImportError</span>: cannot import name &#39;Iterable&#39; from &#39;collections&#39; (C:\Users\Josue\anaconda3\Lib\collections\__init__.py)
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="multicollinearity">
+<h1>Multicollinearity<a class="headerlink" href="#multicollinearity" title="Link to this heading">#</a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Link to this heading">#</a></h2>
+<p><strong>Multicollinearity</strong> occurs when one or more predictor variables in a multiple regression model are highly correlated. This can significantly affect the accuracy of the coefficient estimates within the model.</p>
+</section>
+<section id="mathematical-explanation">
+<h2>Mathematical Explanation<a class="headerlink" href="#mathematical-explanation" title="Link to this heading">#</a></h2>
+<p>Consider the linear regression model:
+<span class="math notranslate nohighlight">\( Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \ldots + \beta_kX_k + \epsilon \)</span></p>
+<p>where:</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(Y\)</span> is the dependent variable</p></li>
+<li><p><span class="math notranslate nohighlight">\(X_1, X_2, \ldots, X_k\)</span> are the independent variables</p></li>
+<li><p><span class="math notranslate nohighlight">\(\epsilon\)</span> is the error term.</p></li>
+</ul>
+<section id="normal-equation">
+<h3>Normal Equation<a class="headerlink" href="#normal-equation" title="Link to this heading">#</a></h3>
+<p>The coefficients <span class="math notranslate nohighlight">\(\beta\)</span> are estimated using the equation:
+<span class="math notranslate nohighlight">\( \beta = (\mathbf{X}´\mathbf{X})^{-1}\mathbf{X}´\mathbf{Y} \)</span></p>
+<p>To find <span class="math notranslate nohighlight">\(\beta\)</span>, the matrix <span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span> must be invertible. However, multicollinearity can make this matrix nearly singular or singular.</p>
+</section>
+<section id="why-mathbf-x-mathbf-x-becomes-non-invertible">
+<h3>Why <span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span> Becomes Non-invertible<a class="headerlink" href="#why-mathbf-x-mathbf-x-becomes-non-invertible" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p><strong>Singular Matrix</strong>: If <span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span> is singular, it implies that its determinant is zero due to perfect or high multicollinearity.</p></li>
+<li><p><strong>Linear Dependence</strong>: This happens when one or more independent variables are linear combinations of others.</p></li>
+</ul>
+<p>Matrix Representation</p>
+<p>Assume <span class="math notranslate nohighlight">\(X_2 = cX_1\)</span>, then:
+<span class="math notranslate nohighlight">\( \mathbf{X} = \begin{bmatrix} 1 &amp; X_1 &amp; X_2 \\ 1 &amp; X_1 &amp; cX_1 \\ \vdots &amp; \vdots &amp; \vdots \\ 1 &amp; X_1 &amp; cX_1 \end{bmatrix} \)</span></p>
+</section>
+<section id="covariance-matrix-mathbf-x-mathbf-x">
+<h3>Covariance Matrix (<span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span>)<a class="headerlink" href="#covariance-matrix-mathbf-x-mathbf-x" title="Link to this heading">#</a></h3>
+<p><span class="math notranslate nohighlight">\( \mathbf{X}´\mathbf{X} = \begin{bmatrix} n &amp; \sum X_1 &amp; c\sum X_1 \\ \sum X_1 &amp; \sum X_1^2 &amp; c\sum X_1^2 \\ c\sum X_1 &amp; c\sum X_1^2 &amp; c^2\sum X_1^2 \end{bmatrix} \)</span></p>
+<p>Here, the columns of <span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span> are linear combinations of each other, which results in:
+<span class="math notranslate nohighlight">\( \text{det}(\mathbf{X}´\mathbf{X}) = 0 \)</span>
+indicating that the matrix is not invertible due to multicollinearity.</p>
+<p>###Example</p>
+<p><strong>-Economic indicators</strong> Predicting country’s economic growth using both consumer spending and consumer income as predictors might lead to multicollinearity because these two are highly correlated; higher income generally leads to higher spending. Including both in the same regression model can cause issues in accurately estimating the impact of each predictor on economic growth.</p>
+<p><strong>-Real Estate Pricing</strong> In real estate, the size of a house and the number of rooms often exhibit multicollinearity. Both these variables tend to increase together; a larger house typically has more rooms. If both variables are used as predictors in a regression model to predict house prices, their high correlation can distort the individual effect of each variable on the pricing, making it difficult to assess which feature (size or number of rooms) truly impacts the house price.</p>
+</section>
+<section id="testing-for-invertibility">
+<h3>Testing for invertibility<a class="headerlink" href="#testing-for-invertibility" title="Link to this heading">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># seed for reproducibility</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># 10x10 matrix with 9 columns following a normal distribution</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">9</span><span class="p">)</span>
+<span class="c1"># 10th column as a linear combination of three other columns</span>
+<span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">([</span><span class="n">A</span><span class="p">,</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">A</span><span class="p">[:,</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">A</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span>  <span class="n">A</span><span class="p">[:,</span><span class="mi">8</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">)])</span>
+
+<span class="c1"># 1st attempt to invert the matrix</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="n">inv_A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Inverse computed successfully:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">inv_A</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">LinAlgError</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Matrix is singular and cannot be inverted&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Matrix is singular and cannot be inverted
+</pre></div>
+</div>
+</div>
+</div>
+<p>In Colab, unlike jupyter notebook, the matrix is non-invertible. This result reflects what was previously expressed, as we have linearly dependent vectors we cannot estimate <span class="math notranslate nohighlight">\(\beta\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">## loading the data</span>
+<span class="n">Penn</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;C:/Users/arami/Desktop/penn_jae.dat&quot;</span> <span class="p">,</span> <span class="n">sep</span><span class="o">=</span><span class="s1">&#39;\s&#39;</span><span class="p">,</span> <span class="n">engine</span><span class="o">=</span><span class="s1">&#39;python&#39;</span><span class="p">)</span>
+<span class="n">n</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">p_1</span> <span class="o">=</span> <span class="n">Penn</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">Penn</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;tg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;tg&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Dependent variable</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Penn</span><span class="p">[[</span><span class="s1">&#39;tg&#39;</span><span class="p">]]</span><span class="o">==</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+<span class="c1"># Create category variable</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span> <span class="s1">&#39;category&#39;</span> <span class="p">)</span>
+<span class="n">Penn</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;dep&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 0, 1]
+Categories (3, int64): [0, 1, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Carry out covariate balance check</span>
+
+<span class="n">formula1</span> <span class="o">=</span> <span class="s2">&quot;T2~(female+black+othrace+C(dep)+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2&quot;</span>
+
+<span class="n">model_results</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">formula1</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model_results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Number of regressors in the basic model:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">model_results</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\arami\anaconda3\lib\site-packages\statsmodels\tsa\base\tsa_model.py:7: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import (to_datetime, Int64Index, DatetimeIndex, Period,
+C:\Users\arami\anaconda3\lib\site-packages\statsmodels\tsa\base\tsa_model.py:7: FutureWarning: pandas.Float64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import (to_datetime, Int64Index, DatetimeIndex, Period,
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     T2   R-squared:                       0.019
+Model:                            OLS   Adj. R-squared:                  0.000
+Method:                 Least Squares   F-statistic:                     4.748
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):           5.79e-51
+Time:                        21:37:27   Log-Likelihood:                -4065.8
+No. Observations:                5782   AIC:                             8352.
+Df Residuals:                    5672   BIC:                             9084.
+Df Model:                         109                                         
+Covariance Type:                  HC1                                         
+=======================================================================================
+                          coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+Intercept               0.5090      0.032     15.741      0.000       0.446       0.572
+C(dep)[T.1]             0.0747      0.057      1.307      0.191      -0.037       0.187
+C(dep)[T.2]             0.0381      0.049      0.773      0.440      -0.058       0.135
+female                 -0.0182      0.036     -0.511      0.609      -0.088       0.052
+female:C(dep)[T.1]     -0.0185      0.045     -0.413      0.680      -0.106       0.069
+female:C(dep)[T.2]      0.0158      0.040      0.396      0.692      -0.062       0.094
+black                  -0.0108      0.068     -0.159      0.873      -0.144       0.122
+black:C(dep)[T.1]      -0.0020      0.067     -0.031      0.976      -0.132       0.128
+black:C(dep)[T.2]      -0.0110      0.063     -0.175      0.861      -0.134       0.112
+othrace                -0.1295      0.250     -0.519      0.604      -0.619       0.360
+othrace:C(dep)[T.1]     0.6118      0.232      2.636      0.008       0.157       1.067
+othrace:C(dep)[T.2]    -0.1486      0.269     -0.552      0.581      -0.676       0.379
+q2                     -0.0788      0.045     -1.767      0.077      -0.166       0.009
+C(dep)[T.1]:q2          0.0431      0.062      0.696      0.486      -0.078       0.164
+C(dep)[T.2]:q2          0.0090      0.053      0.170      0.865      -0.095       0.113
+q3                     -0.1042      0.042     -2.501      0.012      -0.186      -0.023
+C(dep)[T.1]:q3         -0.0303      0.058     -0.519      0.604      -0.145       0.084
+C(dep)[T.2]:q3          0.0386      0.052      0.737      0.461      -0.064       0.141
+q4                     -0.0646      0.042     -1.522      0.128      -0.148       0.019
+C(dep)[T.1]:q4         -0.0482      0.058     -0.829      0.407      -0.162       0.066
+C(dep)[T.2]:q4         -0.0112      0.054     -0.208      0.835      -0.117       0.094
+q5                     -0.1248      0.061     -2.031      0.042      -0.245      -0.004
+C(dep)[T.1]:q5         -0.0347      0.089     -0.388      0.698      -0.210       0.141
+C(dep)[T.2]:q5          0.0339      0.076      0.449      0.653      -0.114       0.182
+q6                     -0.0296      0.082     -0.360      0.719      -0.191       0.132
+C(dep)[T.1]:q6         -0.0186      0.069     -0.270      0.787      -0.154       0.117
+C(dep)[T.2]:q6          0.0447      0.060      0.745      0.456      -0.073       0.162
+agelt35                -0.0553      0.059     -0.930      0.353      -0.172       0.061
+C(dep)[T.1]:agelt35    -0.0869      0.061     -1.436      0.151      -0.206       0.032
+C(dep)[T.2]:agelt35    -0.1097      0.154     -0.713      0.476      -0.411       0.192
+agegt54                -0.0555      0.047     -1.173      0.241      -0.148       0.037
+C(dep)[T.1]:agegt54    -0.0006      0.058     -0.011      0.991      -0.115       0.114
+C(dep)[T.2]:agegt54    -0.1089      0.051     -2.127      0.033      -0.209      -0.009
+durable                -0.1152      0.060     -1.914      0.056      -0.233       0.003
+C(dep)[T.1]:durable    -0.0628      0.071     -0.880      0.379      -0.203       0.077
+C(dep)[T.2]:durable    -0.1011      0.059     -1.699      0.089      -0.218       0.016
+lusd                   -0.0655      0.042     -1.543      0.123      -0.149       0.018
+C(dep)[T.1]:lusd       -0.0247      0.055     -0.446      0.656      -0.133       0.084
+C(dep)[T.2]:lusd       -0.0528      0.050     -1.055      0.292      -0.151       0.045
+husd                   -0.0608      0.037     -1.625      0.104      -0.134       0.013
+C(dep)[T.1]:husd       -0.0272      0.049     -0.554      0.579      -0.124       0.069
+C(dep)[T.2]:husd       -0.0549      0.043     -1.267      0.205      -0.140       0.030
+female:black            0.0069      0.044      0.155      0.877      -0.080       0.094
+female:othrace          0.0383      0.174      0.219      0.826      -0.304       0.380
+female:q2              -0.0406      0.041     -1.000      0.317      -0.120       0.039
+female:q3               0.0383      0.039      0.989      0.323      -0.038       0.114
+female:q4               0.0362      0.039      0.932      0.351      -0.040       0.112
+female:q5               0.1090      0.061      1.791      0.073      -0.010       0.228
+female:q6              -0.0133      0.048     -0.277      0.782      -0.108       0.081
+female:agelt35         -0.0228      0.047     -0.480      0.631      -0.116       0.070
+female:agegt54         -0.0634      0.044     -1.446      0.148      -0.149       0.023
+female:durable         -0.0285      0.043     -0.657      0.511      -0.114       0.057
+female:lusd             0.0128      0.038      0.338      0.736      -0.062       0.087
+female:husd            -0.0166      0.032     -0.516      0.606      -0.080       0.047
+black:othrace        5.806e-16   3.67e-16      1.583      0.113   -1.38e-16     1.3e-15
+black:q2                0.1424      0.064      2.230      0.026       0.017       0.268
+black:q3                0.0355      0.058      0.607      0.544      -0.079       0.150
+black:q4               -0.0941      0.060     -1.564      0.118      -0.212       0.024
+black:q5                0.0064      0.089      0.072      0.942      -0.169       0.181
+black:q6               -0.0286      0.099     -0.289      0.773      -0.223       0.165
+black:agelt35          -0.0863      0.080     -1.079      0.281      -0.243       0.071
+black:agegt54          -0.0247      0.070     -0.353      0.724      -0.162       0.113
+black:durable          -0.0363      0.077     -0.471      0.637      -0.187       0.115
+black:lusd              0.1510      0.186      0.811      0.417      -0.214       0.516
+black:husd             -0.0033      0.054     -0.060      0.952      -0.109       0.103
+othrace:q2             -0.5813      0.367     -1.585      0.113      -1.300       0.138
+othrace:q3              0.1171      0.217      0.540      0.589      -0.308       0.542
+othrace:q4             -0.0792      0.220     -0.361      0.718      -0.510       0.352
+othrace:q5             -0.1960      0.195     -1.007      0.314      -0.578       0.186
+othrace:q6           8.938e-16   4.64e-16      1.927      0.054   -1.56e-17     1.8e-15
+othrace:agelt35        -0.1305      0.379     -0.344      0.731      -0.873       0.612
+othrace:agegt54         0.0312      0.215      0.145      0.885      -0.390       0.453
+othrace:durable         0.4016      0.226      1.775      0.076      -0.042       0.845
+othrace:lusd           -0.8868      0.347     -2.554      0.011      -1.568      -0.206
+othrace:husd           -0.0610      0.183     -0.333      0.739      -0.419       0.298
+q2:q3                1.859e-16   1.49e-16      1.250      0.211   -1.06e-16    4.78e-16
+q2:q4               -2.228e-16   2.03e-16     -1.096      0.273   -6.21e-16    1.76e-16
+q2:q5               -3.543e-16    4.4e-16     -0.804      0.421   -1.22e-15    5.09e-16
+q2:q6                  -0.0154      0.078     -0.198      0.843      -0.168       0.137
+q2:agelt35              0.1697      0.064      2.637      0.008       0.044       0.296
+q2:agegt54              0.0474      0.056      0.847      0.397      -0.062       0.157
+q2:durable              0.1072      0.063      1.697      0.090      -0.017       0.231
+q2:lusd                 0.0503      0.053      0.943      0.346      -0.054       0.155
+q2:husd                -0.0097      0.046     -0.208      0.835      -0.101       0.081
+q3:q4                1.469e-16   1.32e-16      1.114      0.265   -1.11e-16    4.05e-16
+q3:q5                1.631e-16   1.89e-16      0.862      0.389   -2.08e-16    5.34e-16
+q3:q6                  -0.1296      0.079     -1.639      0.101      -0.285       0.025
+q3:agelt35              0.1499      0.060      2.483      0.013       0.032       0.268
+q3:agegt54              0.1074      0.053      2.010      0.045       0.003       0.212
+q3:durable              0.1372      0.061      2.236      0.025       0.017       0.257
+q3:lusd                 0.0479      0.051      0.931      0.352      -0.053       0.149
+q3:husd                 0.0454      0.044      1.026      0.305      -0.041       0.132
+q4:q5                3.846e-17   9.23e-17      0.417      0.677   -1.43e-16    2.19e-16
+q4:q6                   0.0342      0.080      0.428      0.668      -0.122       0.191
+q4:agelt35              0.0759      0.060      1.276      0.202      -0.041       0.193
+q4:agegt54              0.0284      0.055      0.518      0.605      -0.079       0.136
+q4:durable              0.0608      0.060      1.008      0.314      -0.058       0.179
+q4:lusd                 0.0334      0.051      0.651      0.515      -0.067       0.134
+q4:husd                 0.0611      0.045      1.352      0.177      -0.028       0.150
+q5:q6                  -0.0330      0.129     -0.255      0.799      -0.287       0.221
+q5:agelt35              0.0551      0.091      0.606      0.544      -0.123       0.233
+q5:agegt54              0.1332      0.076      1.744      0.081      -0.017       0.283
+q5:durable              0.0982      0.100      0.987      0.324      -0.097       0.293
+q5:lusd                -0.0596      0.080     -0.745      0.456      -0.216       0.097
+q5:husd                -0.0066      0.067     -0.098      0.922      -0.139       0.125
+q6:agelt35             -0.0164      0.071     -0.231      0.818      -0.156       0.123
+q6:agegt54              0.0623      0.067      0.925      0.355      -0.070       0.194
+q6:durable              0.0175      0.072      0.241      0.809      -0.124       0.159
+q6:lusd                 0.0419      0.054      0.779      0.436      -0.064       0.147
+q6:husd                 0.0823      0.052      1.584      0.113      -0.020       0.184
+agelt35:agegt54        -0.0283      0.062     -0.457      0.648      -0.150       0.093
+agelt35:durable         0.0207      0.063      0.328      0.743      -0.103       0.145
+agelt35:lusd           -0.0533      0.056     -0.948      0.343      -0.164       0.057
+agelt35:husd           -0.0164      0.053     -0.312      0.755      -0.120       0.087
+agegt54:durable              0          0        nan        nan           0           0
+agegt54:lusd            0.0501      0.052      0.959      0.337      -0.052       0.152
+agegt54:husd            0.0508      0.043      1.181      0.238      -0.034       0.135
+durable:lusd            0.1570      0.056      2.822      0.005       0.048       0.266
+durable:husd            0.1278      0.053      2.414      0.016       0.024       0.232
+lusd:husd                    0          0        nan        nan           0           0
+==============================================================================
+Omnibus:                    22532.679   Durbin-Watson:                   2.015
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              902.476
+Skew:                           0.315   Prob(JB):                    1.07e-196
+Kurtosis:                       1.170   Cond. No.                     1.40e+16
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The smallest eigenvalue is 5.77e-29. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
+Number of regressors in the basic model: 120 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\arami\anaconda3\lib\site-packages\statsmodels\base\model.py:1832: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 119, but rank is 108
+  warnings.warn(&#39;covariance of constraints does not have full &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regress treatment on all covariates using data from R</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[[</span><span class="s1">&#39;T2&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+<span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;C:/Users/arami/Desktop/m_reg_g2.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">]</span>
+
+<span class="c1"># model = &quot;T2~(female+black+othrace+C(dep)+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2&quot;</span>
+
+<span class="n">model_results</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">y</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">model_results</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Number of regressors in the basic model:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">model_results</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                     T2   R-squared:                       0.016
+Model:                            OLS   Adj. R-squared:                 -0.002
+Method:                 Least Squares   F-statistic:                     4.204
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):           2.42e-39
+Time:                        21:37:27   Log-Likelihood:                -4075.6
+No. Observations:                5782   AIC:                             8357.
+Df Residuals:                    5679   BIC:                             9043.
+Df Model:                         102                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+(Intercept)              0.5171      0.157      3.296      0.001       0.210       0.825
+female                   0.0056      0.132      0.042      0.966      -0.254       0.265
+black                   -0.0308      0.085     -0.363      0.716      -0.197       0.135
+othrace                 -0.4279      0.301     -1.424      0.155      -1.017       0.161
+factor(dep)1             0.1577      0.185      0.851      0.395      -0.205       0.521
+factor(dep)2            -0.1928      0.151     -1.278      0.201      -0.489       0.103
+q2                      -0.1092      0.158     -0.690      0.490      -0.420       0.201
+q3                      -0.1076      0.158     -0.681      0.496      -0.417       0.202
+q4                      -0.0621      0.158     -0.393      0.694      -0.372       0.248
+q5                      -0.0499      0.158     -0.317      0.752      -0.359       0.259
+q6                      -0.2176      0.156     -1.397      0.163      -0.523       0.088
+agelt35                 -0.0643      0.133     -0.485      0.628      -0.324       0.196
+agegt54                  0.0259      0.240      0.108      0.914      -0.444       0.496
+durable                 -0.1256      0.176     -0.712      0.476      -0.471       0.220
+lusd                     0.0861      0.069      1.246      0.213      -0.049       0.221
+husd                    -0.0182      0.076     -0.238      0.812      -0.167       0.131
+female:black             0.0027      0.044      0.061      0.951      -0.083       0.089
+female:othrace           0.1015      0.206      0.492      0.623      -0.303       0.506
+female:factor(dep)1     -0.0179      0.045     -0.398      0.691      -0.106       0.070
+female:factor(dep)2      0.0219      0.040      0.553      0.581      -0.056       0.100
+female:q2               -0.0995      0.132     -0.753      0.452      -0.359       0.160
+female:q3               -0.0144      0.132     -0.109      0.913      -0.273       0.244
+female:q4               -0.0167      0.132     -0.127      0.899      -0.275       0.241
+female:q5               -0.0586      0.131     -0.447      0.655      -0.316       0.198
+female:q6                0.0550      0.140      0.394      0.694      -0.219       0.329
+female:agelt35           0.0333      0.030      1.127      0.260      -0.025       0.091
+female:agegt54          -0.0110      0.050     -0.219      0.826      -0.109       0.087
+female:durable          -0.0586      0.044     -1.340      0.180      -0.144       0.027
+female:lusd              0.0051      0.033      0.153      0.878      -0.060       0.070
+female:husd              0.0187      0.037      0.509      0.611      -0.053       0.091
+black:factor(dep)1      -0.0139      0.068     -0.206      0.837      -0.146       0.118
+black:factor(dep)2      -0.0230      0.062     -0.370      0.712      -0.145       0.099
+black:q2                 0.1311      0.091      1.440      0.150      -0.047       0.309
+black:q3                 0.0357      0.088      0.407      0.684      -0.136       0.207
+black:q4                -0.1095      0.089     -1.227      0.220      -0.284       0.065
+black:q5                -0.0108      0.087     -0.124      0.901      -0.181       0.159
+black:agelt35            0.0295      0.045      0.659      0.510      -0.058       0.117
+black:agegt54           -0.0575      0.082     -0.701      0.484      -0.218       0.103
+black:durable           -0.0122      0.069     -0.176      0.860      -0.148       0.124
+black:lusd               0.0106      0.055      0.192      0.848      -0.097       0.119
+black:husd               0.1309      0.181      0.724      0.469      -0.224       0.486
+othrace:factor(dep)1     0.5857      0.223      2.631      0.009       0.149       1.022
+othrace:factor(dep)2    -0.1436      0.332     -0.433      0.665      -0.794       0.506
+othrace:q2              -0.4009      0.345     -1.162      0.245      -1.077       0.276
+othrace:q3               0.6009      0.236      2.544      0.011       0.138       1.064
+othrace:q4               0.2964      0.287      1.033      0.302      -0.266       0.859
+othrace:q5               0.2727      0.192      1.418      0.156      -0.104       0.650
+othrace:agelt35          0.0078      0.208      0.037      0.970      -0.400       0.416
+othrace:agegt54          0.2412      0.319      0.755      0.450      -0.385       0.867
+othrace:durable         -0.1464      0.214     -0.684      0.494      -0.566       0.273
+othrace:lusd             0.0925      0.207      0.447      0.655      -0.313       0.498
+othrace:husd            -0.8587      0.318     -2.702      0.007      -1.482      -0.236
+factor(dep)1:q2         -0.0779      0.186     -0.419      0.675      -0.442       0.286
+factor(dep)2:q2          0.1434      0.150      0.957      0.339      -0.150       0.437
+factor(dep)1:q3         -0.1494      0.185     -0.808      0.419      -0.512       0.213
+factor(dep)2:q3          0.1687      0.150      1.125      0.261      -0.125       0.463
+factor(dep)1:q4         -0.1595      0.184     -0.868      0.386      -0.520       0.201
+factor(dep)2:q4          0.1210      0.150      0.805      0.421      -0.174       0.416
+factor(dep)1:q5         -0.1177      0.183     -0.642      0.521      -0.477       0.242
+factor(dep)2:q5          0.1390      0.149      0.934      0.350      -0.153       0.431
+factor(dep)1:q6         -0.1531      0.195     -0.785      0.432      -0.535       0.229
+factor(dep)2:q6          0.1619      0.159      1.016      0.310      -0.150       0.474
+factor(dep)1:agelt35    -0.0036      0.047     -0.077      0.939      -0.095       0.088
+factor(dep)2:agelt35     0.0615      0.037      1.657      0.098      -0.011       0.134
+factor(dep)1:agegt54    -0.0883      0.065     -1.359      0.174      -0.216       0.039
+factor(dep)2:agegt54    -0.0785      0.151     -0.520      0.603      -0.374       0.217
+factor(dep)1:durable     0.0088      0.058      0.152      0.879      -0.104       0.122
+factor(dep)2:durable    -0.0924      0.051     -1.814      0.070      -0.192       0.007
+factor(dep)1:lusd        0.0359      0.050      0.710      0.478      -0.063       0.135
+factor(dep)2:lusd        0.0707      0.046      1.537      0.124      -0.019       0.161
+factor(dep)1:husd       -0.0181      0.054     -0.333      0.739      -0.124       0.088
+factor(dep)2:husd        0.0066      0.048      0.138      0.890      -0.087       0.100
+q2:agelt35               0.0306      0.133      0.231      0.818      -0.229       0.291
+q2:agegt54               0.0590      0.239      0.247      0.805      -0.410       0.528
+q2:durable               0.1371      0.175      0.783      0.434      -0.206       0.480
+q2:lusd                 -0.0531      0.072     -0.737      0.461      -0.194       0.088
+q2:husd                  0.0860      0.078      1.107      0.268      -0.066       0.238
+q3:agelt35               0.0303      0.132      0.229      0.819      -0.229       0.290
+q3:agegt54               0.0251      0.238      0.106      0.916      -0.441       0.491
+q3:durable               0.1905      0.175      1.089      0.276      -0.153       0.533
+q3:lusd                 -0.0706      0.071     -1.001      0.317      -0.209       0.068
+q3:husd                  0.0444      0.077      0.575      0.566      -0.107       0.196
+q4:agelt35               0.0723      0.132      0.546      0.585      -0.187       0.332
+q4:agegt54              -0.0193      0.237     -0.081      0.935      -0.484       0.445
+q4:durable               0.1229      0.176      0.699      0.485      -0.222       0.467
+q4:lusd                 -0.1132      0.071     -1.590      0.112      -0.253       0.026
+q4:husd                  0.0103      0.077      0.134      0.894      -0.141       0.162
+q5:agelt35               0.0465      0.132      0.353      0.724      -0.211       0.304
+q5:agegt54              -0.1165      0.236     -0.493      0.622      -0.579       0.346
+q5:durable               0.1025      0.173      0.591      0.555      -0.238       0.442
+q5:lusd                 -0.0357      0.070     -0.508      0.611      -0.174       0.102
+q5:husd                  0.0270      0.076      0.357      0.721      -0.121       0.175
+q6:agelt35               0.1099      0.140      0.787      0.431      -0.164       0.384
+q6:agegt54              -0.0174      0.248     -0.070      0.944      -0.503       0.469
+q6:durable               0.2161      0.183      1.179      0.239      -0.143       0.576
+agelt35:durable          0.0323      0.040      0.801      0.423      -0.047       0.111
+agelt35:lusd            -0.0092      0.035     -0.265      0.791      -0.077       0.059
+agelt35:husd            -0.0250      0.039     -0.641      0.521      -0.101       0.051
+agegt54:durable         -0.0155      0.065     -0.236      0.813      -0.144       0.113
+agegt54:lusd             0.0287      0.057      0.504      0.614      -0.083       0.140
+agegt54:husd            -0.0423      0.061     -0.694      0.488      -0.162       0.077
+durable:lusd            -0.0386      0.043     -0.901      0.368      -0.122       0.045
+durable:husd             0.0093      0.053      0.178      0.859      -0.094       0.112
+==============================================================================
+Omnibus:                    22320.003   Durbin-Watson:                   2.010
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              913.891
+Skew:                           0.316   Prob(JB):                    3.56e-199
+Kurtosis:                       1.158   Cond. No.                         236.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+Number of regressors in the basic model: 103 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\arami\anaconda3\lib\site-packages\statsmodels\base\model.py:1832: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 102, but rank is 101
+  warnings.warn(&#39;covariance of constraints does not have full &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot two histograms for treatment and control group to see the distribution of the outcome variable inuidur1</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">inuidur1_t2_1</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">1</span><span class="p">][</span><span class="s1">&#39;inuidur1&#39;</span><span class="p">]</span>
+<span class="n">inuidur1_t2_0</span> <span class="o">=</span> <span class="n">Penn</span><span class="p">[</span><span class="n">Penn</span><span class="p">[</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">][</span><span class="s1">&#39;inuidur1&#39;</span><span class="p">]</span>
+
+<span class="c1"># Crear una figura y subtramas</span>
+<span class="n">fig</span><span class="p">,</span> <span class="n">axs</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1"># Crear histograma para T2 = 1</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">inuidur1_t2_1</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;T2 = 1&#39;</span><span class="p">)</span>
+
+<span class="c1"># Crear histograma para T2 = 0</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">inuidur1_t2_0</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="n">axs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;T2 = 0&#39;</span><span class="p">)</span>
+
+<span class="c1"># Agregar etiquetas de ejes</span>
+<span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axs</span><span class="p">:</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Valores de inuidur1&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Frecuencia&#39;</span><span class="p">)</span>
+
+<span class="c1"># Mostrar el histograma</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/193108fbe5a5e272e11dd25fbfe6fd1a793ec9c7afdda2090279acab72822ba2.png" src="_images/193108fbe5a5e272e11dd25fbfe6fd1a793ec9c7afdda2090279acab72822ba2.png" />
+</div>
+</div>
+<p>Run all specifications:
+classical 2-sample approach, no adjustment (CL)
+classical linear regression adjustment (CRA)
+interactive regression adjustment (IRA)
+interactive regression adjustment (IRA) using Lasso. Use Hdm package for Python , R and Julia scripts.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model specification</span>
+<span class="c1"># take log of inuidur1</span>
+<span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;log_inuidur1&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">)</span>
+<span class="n">log_inuidur1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+<span class="c1"># no adjustment (2-sample approach)</span>
+<span class="n">formula_cl</span> <span class="o">=</span> <span class="s1">&#39;log_inuidur1 ~ T2&#39;</span>
+
+<span class="n">ols_cl</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">formula_cl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Penn</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># adding controls</span>
+
+<span class="n">formula_cra</span> <span class="o">=</span> <span class="s1">&#39;log_inuidur1 ~ T2 + (female+black+othrace+C(dep)+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2&#39;</span>
+<span class="c1"># Omitted dummies: q1, nondurable, muld</span>
+
+<span class="n">ols_cra</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">formula_cra</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Penn</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_cl</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_cra</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Number of regressors in the control model:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ols_cra</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           log_inuidur1   R-squared:                       0.001
+Model:                            OLS   Adj. R-squared:                  0.001
+Method:                 Least Squares   F-statistic:                     5.879
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):             0.0154
+Time:                        21:37:29   Log-Likelihood:                -9344.7
+No. Observations:                5782   AIC:                         1.869e+04
+Df Residuals:                    5780   BIC:                         1.871e+04
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.0568      0.021     98.158      0.000       2.016       2.098
+T2            -0.0788      0.033     -2.425      0.015      -0.143      -0.015
+==============================================================================
+Omnibus:                     3220.110   Durbin-Watson:                   1.978
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              593.120
+Skew:                          -0.541   Prob(JB):                    1.61e-129
+Kurtosis:                       1.865   Cond. No.                         2.47
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           log_inuidur1   R-squared:                       0.062
+Model:                            OLS   Adj. R-squared:                  0.044
+Method:                 Least Squares   F-statistic:                     89.08
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):               0.00
+Time:                        21:37:29   Log-Likelihood:                -9162.5
+No. Observations:                5782   AIC:                         1.855e+04
+Df Residuals:                    5671   BIC:                         1.929e+04
+Df Model:                         110                                         
+Covariance Type:                  HC1                                         
+=======================================================================================
+                          coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------
+Intercept               1.7006      0.081     21.063      0.000       1.542       1.859
+C(dep)[T.1]             0.1619      0.142      1.140      0.254      -0.116       0.440
+C(dep)[T.2]             0.0232      0.123      0.188      0.851      -0.219       0.265
+T2                     -0.0691      0.032     -2.152      0.031      -0.132      -0.006
+female                  0.1419      0.089      1.602      0.109      -0.032       0.315
+female:C(dep)[T.1]     -0.1352      0.110     -1.229      0.219      -0.351       0.080
+female:C(dep)[T.2]     -0.0401      0.096     -0.419      0.675      -0.227       0.147
+black                  -0.1316      0.179     -0.737      0.461      -0.482       0.219
+black:C(dep)[T.1]       0.1944      0.180      1.080      0.280      -0.159       0.547
+black:C(dep)[T.2]       0.0153      0.166      0.092      0.927      -0.311       0.341
+othrace                -0.8597      0.827     -1.039      0.299      -2.482       0.762
+othrace:C(dep)[T.1]     1.2158      0.470      2.586      0.010       0.294       2.138
+othrace:C(dep)[T.2]    -0.4329      0.446     -0.971      0.332      -1.307       0.441
+q2                      0.2998      0.107      2.797      0.005       0.090       0.510
+C(dep)[T.1]:q2          0.0544      0.146      0.373      0.709      -0.231       0.340
+C(dep)[T.2]:q2          0.2706      0.131      2.072      0.038       0.015       0.527
+q3                      0.0412      0.101      0.407      0.684      -0.157       0.239
+C(dep)[T.1]:q3         -0.0467      0.142     -0.329      0.742      -0.325       0.231
+C(dep)[T.2]:q3          0.2327      0.125      1.860      0.063      -0.013       0.478
+q4                      0.0718      0.105      0.682      0.495      -0.135       0.278
+C(dep)[T.1]:q4         -0.1009      0.146     -0.692      0.489      -0.387       0.185
+C(dep)[T.2]:q4          0.2781      0.133      2.087      0.037       0.017       0.539
+q5                     -0.0138      0.162     -0.085      0.932      -0.332       0.304
+C(dep)[T.1]:q5          0.0185      0.241      0.077      0.939      -0.454       0.491
+C(dep)[T.2]:q5          0.4402      0.179      2.456      0.014       0.089       0.792
+q6                      0.3561      0.158      2.254      0.024       0.046       0.666
+C(dep)[T.1]:q6         -0.1036      0.120     -0.862      0.389      -0.339       0.132
+C(dep)[T.2]:q6         -0.0780      0.101     -0.771      0.441      -0.276       0.120
+agelt35                 0.3653      0.151      2.417      0.016       0.069       0.662
+C(dep)[T.1]:agelt35    -0.1455      0.148     -0.985      0.325      -0.435       0.144
+C(dep)[T.2]:agelt35     0.1357      0.360      0.377      0.706      -0.570       0.841
+agegt54                 0.0811      0.119      0.683      0.495      -0.152       0.314
+C(dep)[T.1]:agegt54     0.2199      0.139      1.584      0.113      -0.052       0.492
+C(dep)[T.2]:agegt54     0.0689      0.121      0.571      0.568      -0.168       0.305
+durable                -0.0048      0.147     -0.033      0.974      -0.292       0.283
+C(dep)[T.1]:durable    -0.1791      0.173     -1.034      0.301      -0.519       0.161
+C(dep)[T.2]:durable    -0.1038      0.139     -0.747      0.455      -0.376       0.169
+lusd                    0.1755      0.104      1.687      0.092      -0.028       0.379
+C(dep)[T.1]:lusd        0.1480      0.131      1.127      0.260      -0.109       0.405
+C(dep)[T.2]:lusd        0.0217      0.117      0.185      0.853      -0.208       0.251
+husd                    0.3846      0.092      4.199      0.000       0.205       0.564
+C(dep)[T.1]:husd        0.0614      0.118      0.520      0.603      -0.170       0.293
+C(dep)[T.2]:husd       -0.1154      0.102     -1.136      0.256      -0.315       0.084
+female:black           -0.3044      0.119     -2.567      0.010      -0.537      -0.072
+female:othrace          0.4972      0.501      0.992      0.321      -0.485       1.480
+female:q2              -0.0813      0.100     -0.815      0.415      -0.277       0.114
+female:q3               0.2179      0.094      2.313      0.021       0.033       0.403
+female:q4               0.1139      0.097      1.178      0.239      -0.076       0.304
+female:q5               0.1687      0.153      1.100      0.271      -0.132       0.469
+female:q6              -0.1162      0.085     -1.370      0.171      -0.283       0.050
+female:agelt35          0.0469      0.113      0.414      0.679      -0.175       0.269
+female:agegt54          0.1466      0.104      1.406      0.160      -0.058       0.351
+female:durable         -0.1252      0.105     -1.194      0.233      -0.331       0.080
+female:lusd            -0.0299      0.089     -0.336      0.737      -0.204       0.145
+female:husd            -0.0517      0.078     -0.663      0.507      -0.204       0.101
+black:othrace        1.615e-15   1.11e-15      1.460      0.144   -5.53e-16    3.78e-15
+black:q2               -0.2414      0.172     -1.405      0.160      -0.578       0.095
+black:q3               -0.1426      0.153     -0.929      0.353      -0.443       0.158
+black:q4               -0.0508      0.167     -0.303      0.762      -0.379       0.278
+black:q5               -0.4827      0.243     -1.989      0.047      -0.959      -0.007
+black:q6                0.2243      0.166      1.354      0.176      -0.100       0.549
+black:agelt35           0.2593      0.206      1.260      0.208      -0.144       0.663
+black:agegt54           0.1850      0.181      1.024      0.306      -0.169       0.539
+black:durable          -0.1287      0.191     -0.674      0.501      -0.503       0.246
+black:lusd              0.4668      0.499      0.935      0.350      -0.512       1.446
+black:husd             -0.1060      0.137     -0.774      0.439      -0.374       0.162
+othrace:q2              0.5939      0.754      0.787      0.431      -0.885       2.073
+othrace:q3             -0.6657      0.566     -1.175      0.240      -1.776       0.445
+othrace:q4              0.0442      0.664      0.067      0.947      -1.257       1.346
+othrace:q5             -0.9973      0.520     -1.917      0.055      -2.017       0.023
+othrace:q6           1.407e-15   1.19e-15      1.180      0.238    -9.3e-16    3.74e-15
+othrace:agelt35        -1.0889      0.936     -1.163      0.245      -2.925       0.747
+othrace:agegt54         1.8903      0.456      4.143      0.000       0.996       2.785
+othrace:durable         0.0586      0.608      0.097      0.923      -1.132       1.250
+othrace:lusd            0.7283      0.859      0.848      0.396      -0.955       2.411
+othrace:husd            0.0410      0.446      0.092      0.927      -0.834       0.916
+q2:q3               -6.098e-17   4.21e-16     -0.145      0.885   -8.86e-16    7.64e-16
+q2:q4               -8.783e-16   5.65e-16     -1.555      0.120   -1.99e-15    2.29e-16
+q2:q5                5.794e-16   5.56e-16      1.041      0.298   -5.12e-16    1.67e-15
+q2:q6                   0.0967      0.145      0.665      0.506      -0.188       0.382
+q2:agelt35             -0.0282      0.159     -0.178      0.859      -0.340       0.283
+q2:agegt54             -0.3669      0.135     -2.721      0.007      -0.631      -0.103
+q2:durable             -0.0502      0.157     -0.320      0.749      -0.358       0.257
+q2:lusd                -0.1269      0.126     -1.003      0.316      -0.375       0.121
+q2:husd                -0.1391      0.112     -1.241      0.214      -0.359       0.081
+q3:q4               -2.158e-17   1.25e-16     -0.173      0.863   -2.66e-16    2.23e-16
+q3:q5                9.418e-17   1.33e-16      0.708      0.479   -1.67e-16    3.55e-16
+q3:q6                  -0.0069      0.145     -0.048      0.962      -0.291       0.278
+q3:agelt35              0.2224      0.148      1.508      0.132      -0.067       0.512
+q3:agegt54              0.0082      0.127      0.064      0.949      -0.241       0.258
+q3:durable              0.0748      0.150      0.500      0.617      -0.219       0.368
+q3:lusd                -0.0130      0.121     -0.107      0.915      -0.251       0.225
+q3:husd                -0.1367      0.107     -1.275      0.202      -0.347       0.074
+q4:q5               -6.446e-16   5.45e-16     -1.182      0.237   -1.71e-15    4.24e-16
+q4:q6                  -0.0781      0.148     -0.529      0.597      -0.367       0.211
+q4:agelt35              0.0914      0.147      0.622      0.534      -0.197       0.379
+q4:agegt54             -0.0626      0.136     -0.462      0.644      -0.328       0.203
+q4:durable              0.1055      0.146      0.722      0.470      -0.181       0.392
+q4:lusd                -0.1218      0.125     -0.972      0.331      -0.367       0.124
+q4:husd                -0.1918      0.111     -1.726      0.084      -0.410       0.026
+q5:q6                   0.0517      0.270      0.191      0.848      -0.478       0.582
+q5:agelt35              0.3411      0.214      1.591      0.112      -0.079       0.761
+q5:agegt54              0.3271      0.186      1.755      0.079      -0.038       0.692
+q5:durable              0.0658      0.237      0.278      0.781      -0.398       0.530
+q5:lusd                 0.1587      0.198      0.802      0.423      -0.229       0.547
+q5:husd                -0.1181      0.169     -0.701      0.484      -0.448       0.212
+q6:agelt35             -0.2787      0.127     -2.196      0.028      -0.527      -0.030
+q6:agegt54              0.1237      0.117      1.062      0.288      -0.105       0.352
+q6:durable              0.2330      0.137      1.697      0.090      -0.036       0.502
+q6:lusd                 0.1301      0.097      1.340      0.180      -0.060       0.320
+q6:husd                -0.0106      0.090     -0.118      0.906      -0.186       0.165
+agelt35:agegt54        -0.0655      0.148     -0.444      0.657      -0.355       0.224
+agelt35:durable        -0.1393      0.156     -0.894      0.371      -0.445       0.166
+agelt35:lusd           -0.2748      0.132     -2.074      0.038      -0.534      -0.015
+agelt35:husd           -0.0742      0.120     -0.618      0.536      -0.310       0.161
+agegt54:durable              0          0        nan        nan           0           0
+agegt54:lusd           -0.0293      0.124     -0.236      0.813      -0.273       0.214
+agegt54:husd           -0.2674      0.103     -2.596      0.009      -0.469      -0.065
+durable:lusd           -0.3206      0.132     -2.430      0.015      -0.579      -0.062
+durable:husd           -0.0422      0.127     -0.332      0.740      -0.291       0.207
+lusd:husd                    0          0        nan        nan           0           0
+==============================================================================
+Omnibus:                     1610.502   Durbin-Watson:                   1.993
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              457.590
+Skew:                          -0.466   Prob(JB):                    4.32e-100
+Kurtosis:                       1.985   Cond. No.                     1.46e+16
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+[2] The smallest eigenvalue is 5.81e-29. This might indicate that there are
+strong multicollinearity problems or that the design matrix is singular.
+Number of regressors in the control model: 121 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\arami\anaconda3\lib\site-packages\statsmodels\base\model.py:1832: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 120, but rank is 109
+  warnings.warn(&#39;covariance of constraints does not have full &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Model Specification using data from R</span>
+<span class="c1"># take log of inuidur1</span>
+<span class="n">log_inuidur1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+<span class="c1"># no adjustment (2-sample approach)</span>
+<span class="n">formula_cl</span> <span class="o">=</span> <span class="s1">&#39;log_inuidur1 ~ T2&#39;</span>
+
+<span class="c1"># adding controls</span>
+<span class="c1"># formula_cra = &#39;log_inuidur1 ~ T2 + (female+black+othrace+dep+q2+q3+q4+q5+q6+agelt35+agegt54+durable+lusd+husd)**2&#39;</span>
+<span class="c1"># Omitted dummies: q1, nondurable, muld</span>
+
+<span class="n">ols_cl</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span> <span class="n">formula</span> <span class="o">=</span> <span class="n">formula_cl</span><span class="p">,</span> <span class="n">data</span> <span class="o">=</span> <span class="n">Penn</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#getting data</span>
+<span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;C:/Users/arami/Desktop/ols_cra_reg_g2.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;X1&#39;</span><span class="p">]</span>
+
+<span class="n">ols_cra</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_cl</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_cra</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span> <span class="s2">&quot;Number of regressors in the interactive model:&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">ols_cra</span><span class="o">.</span><span class="n">params</span><span class="p">),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+
+<span class="c1"># create Y variable</span>
+<span class="n">log_inuidur1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span> <span class="n">Penn</span><span class="p">[</span><span class="s2">&quot;inuidur1&quot;</span><span class="p">]</span> <span class="p">))</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span> <span class="n">drop</span> <span class="o">=</span> <span class="kc">True</span> <span class="p">)</span>
+
+<span class="c1"># Reset index to estimation</span>
+<span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;C:/Users/arami/Desktop/ols_ira_reg_g2.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;S1&#39;</span><span class="p">]</span>
+
+<span class="n">ols_ira</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">X_vars</span> <span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">get_robustcov_results</span><span class="p">(</span><span class="n">cov_type</span> <span class="o">=</span> <span class="s2">&quot;HC1&quot;</span><span class="p">)</span>
+
+<span class="c1"># Results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ols_ira</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:           log_inuidur1   R-squared:                       0.001
+Model:                            OLS   Adj. R-squared:                  0.001
+Method:                 Least Squares   F-statistic:                     5.879
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):             0.0154
+Time:                        21:37:29   Log-Likelihood:                -9344.7
+No. Observations:                5782   AIC:                         1.869e+04
+Df Residuals:                    5780   BIC:                         1.871e+04
+Df Model:                           1                                         
+Covariance Type:                  HC1                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      2.0568      0.021     98.158      0.000       2.016       2.098
+T2            -0.0788      0.033     -2.425      0.015      -0.143      -0.015
+==============================================================================
+Omnibus:                     3220.110   Durbin-Watson:                   1.978
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              593.120
+Skew:                          -0.541   Prob(JB):                    1.61e-129
+Kurtosis:                       1.865   Cond. No.                         2.47
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               inuidur1   R-squared:                       0.056
+Model:                            OLS   Adj. R-squared:                  0.039
+Method:                 Least Squares   F-statistic:                     84.52
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):               0.00
+Time:                        21:37:29   Log-Likelihood:                -9180.6
+No. Observations:                5782   AIC:                         1.857e+04
+Df Residuals:                    5678   BIC:                         1.926e+04
+Df Model:                         103                                         
+Covariance Type:                  HC1                                         
+========================================================================================
+                           coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------------
+(Intercept)              2.4472      0.358      6.834      0.000       1.745       3.149
+T2                      -0.0712      0.032     -2.222      0.026      -0.134      -0.008
+female                  -0.9428      0.283     -3.334      0.001      -1.497      -0.388
+black                   -0.6654      0.243     -2.738      0.006      -1.142      -0.189
+othrace                 -1.5495      0.731     -2.119      0.034      -2.983      -0.116
+factor(dep)1             0.2798      0.378      0.740      0.460      -0.462       1.022
+factor(dep)2             0.1678      0.368      0.456      0.648      -0.553       0.889
+q2                       0.0271      0.361      0.075      0.940      -0.680       0.734
+q3                      -0.3542      0.360     -0.984      0.325      -1.060       0.352
+q4                      -0.3380      0.361     -0.937      0.349      -1.045       0.369
+q5                      -0.1777      0.360     -0.494      0.621      -0.883       0.528
+q6                      -0.4456      0.361     -1.233      0.217      -1.154       0.263
+agelt35                 -0.3265      0.311     -1.050      0.294      -0.936       0.283
+agegt54                 -0.1552      0.480     -0.323      0.746      -1.095       0.785
+durable                 -1.0152      0.445     -2.282      0.023      -1.887      -0.143
+lusd                    -0.1194      0.174     -0.684      0.494      -0.461       0.223
+husd                     0.0703      0.188      0.374      0.708      -0.298       0.438
+female:black            -0.2840      0.118     -2.403      0.016      -0.516      -0.052
+female:othrace           0.4212      0.488      0.863      0.388      -0.536       1.378
+female:factor(dep)1     -0.0852      0.110     -0.776      0.438      -0.300       0.130
+female:factor(dep)2      0.0192      0.096      0.200      0.842      -0.169       0.207
+female:q2                0.7579      0.282      2.691      0.007       0.206       1.310
+female:q3                1.1132      0.280      3.969      0.000       0.563       1.663
+female:q4                1.0476      0.280      3.737      0.000       0.498       1.597
+female:q5                0.9392      0.280      3.357      0.001       0.391       1.488
+female:q6                1.0943      0.305      3.586      0.000       0.496       1.693
+female:agelt35           0.0897      0.072      1.250      0.211      -0.051       0.230
+female:agegt54           0.1052      0.119      0.882      0.378      -0.129       0.339
+female:durable           0.1479      0.105      1.414      0.157      -0.057       0.353
+female:lusd              0.1040      0.080      1.294      0.196      -0.054       0.262
+female:husd              0.0405      0.087      0.465      0.642      -0.130       0.211
+black:factor(dep)1       0.2551      0.178      1.435      0.151      -0.093       0.603
+black:factor(dep)2      -0.0027      0.169     -0.016      0.987      -0.333       0.328
+black:q2                 0.1579      0.254      0.621      0.535      -0.340       0.656
+black:q3                 0.3137      0.242      1.295      0.195      -0.161       0.788
+black:q4                 0.4071      0.253      1.608      0.108      -0.089       0.903
+black:q5                 0.4780      0.242      1.972      0.049       0.003       0.953
+black:agelt35           -0.0328      0.120     -0.273      0.785      -0.268       0.202
+black:agegt54            0.2404      0.215      1.118      0.264      -0.181       0.662
+black:durable            0.1605      0.182      0.883      0.378      -0.196       0.517
+black:lusd               0.0977      0.140      0.699      0.485      -0.176       0.372
+black:husd               0.5227      0.471      1.111      0.267      -0.400       1.445
+othrace:factor(dep)1     1.1662      0.569      2.050      0.040       0.051       2.281
+othrace:factor(dep)2    -0.7687      0.688     -1.117      0.264      -2.118       0.580
+othrace:q2               1.5108      0.755      2.000      0.046       0.030       2.992
+othrace:q3               0.2916      0.401      0.727      0.467      -0.495       1.078
+othrace:q4               0.9423      0.522      1.806      0.071      -0.080       1.965
+othrace:q5               0.9633      0.451      2.137      0.033       0.079       1.847
+othrace:agelt35         -0.1902      0.574     -0.331      0.740      -1.316       0.935
+othrace:agegt54         -1.5320      0.777     -1.971      0.049      -3.056      -0.008
+othrace:durable          1.9037      0.298      6.379      0.000       1.319       2.489
+othrace:lusd            -0.1288      0.385     -0.335      0.738      -0.883       0.625
+othrace:husd             0.6131      0.632      0.970      0.332      -0.626       1.853
+factor(dep)1:q2         -0.0578      0.377     -0.154      0.878      -0.796       0.681
+factor(dep)2:q2         -0.0868      0.366     -0.237      0.813      -0.805       0.631
+factor(dep)1:q3         -0.1448      0.377     -0.384      0.701      -0.883       0.594
+factor(dep)2:q3         -0.0664      0.366     -0.181      0.856      -0.784       0.651
+factor(dep)1:q4         -0.2323      0.376     -0.618      0.537      -0.969       0.504
+factor(dep)2:q4         -0.0189      0.366     -0.052      0.959      -0.737       0.699
+factor(dep)1:q5         -0.1367      0.375     -0.365      0.715      -0.871       0.598
+factor(dep)2:q5         -0.3474      0.366     -0.950      0.342      -1.065       0.370
+factor(dep)1:q6         -0.0754      0.424     -0.178      0.859      -0.906       0.755
+factor(dep)2:q6          0.1670      0.386      0.432      0.665      -0.590       0.924
+factor(dep)1:agelt35     0.0296      0.111      0.266      0.790      -0.188       0.247
+factor(dep)2:agelt35     0.0604      0.088      0.684      0.494      -0.113       0.234
+factor(dep)1:agegt54    -0.0654      0.158     -0.414      0.679      -0.375       0.244
+factor(dep)2:agegt54     0.2389      0.350      0.682      0.495      -0.448       0.926
+factor(dep)1:durable     0.2490      0.139      1.791      0.073      -0.024       0.522
+factor(dep)2:durable     0.1155      0.121      0.955      0.340      -0.122       0.353
+factor(dep)1:lusd       -0.1891      0.120     -1.578      0.115      -0.424       0.046
+factor(dep)2:lusd        0.0100      0.108      0.092      0.926      -0.202       0.222
+factor(dep)1:husd        0.0210      0.130      0.162      0.871      -0.234       0.276
+factor(dep)2:husd        0.0644      0.112      0.575      0.565      -0.155       0.284
+q2:agelt35               0.1075      0.311      0.346      0.729      -0.501       0.716
+q2:agegt54               0.2089      0.479      0.436      0.663      -0.730       1.148
+q2:durable               0.4369      0.445      0.983      0.326      -0.435       1.309
+q2:lusd                 -0.0452      0.178     -0.255      0.799      -0.393       0.303
+q2:husd                 -0.2224      0.187     -1.191      0.234      -0.588       0.144
+q3:agelt35               0.1805      0.311      0.581      0.561      -0.428       0.789
+q3:agegt54               0.5557      0.475      1.169      0.242      -0.376       1.487
+q3:durable               0.8396      0.444      1.889      0.059      -0.032       1.711
+q3:lusd                 -0.0160      0.175     -0.091      0.927      -0.359       0.327
+q3:husd                 -0.1131      0.185     -0.610      0.542      -0.476       0.250
+q4:agelt35               0.1183      0.310      0.381      0.703      -0.490       0.727
+q4:agegt54               0.3742      0.473      0.791      0.429      -0.553       1.301
+q4:durable               0.7434      0.447      1.663      0.096      -0.133       1.620
+q4:lusd                 -0.0222      0.178     -0.125      0.901      -0.371       0.326
+q4:husd                 -0.1848      0.186     -0.993      0.321      -0.550       0.180
+q5:agelt35              -0.0348      0.309     -0.112      0.910      -0.642       0.572
+q5:agegt54               0.2173      0.474      0.458      0.647      -0.712       1.147
+q5:durable               0.8554      0.444      1.928      0.054      -0.014       1.725
+q5:lusd                 -0.1843      0.177     -1.043      0.297      -0.531       0.162
+q5:husd                 -0.2742      0.184     -1.486      0.137      -0.636       0.088
+q6:agelt35               0.1822      0.333      0.547      0.584      -0.471       0.835
+q6:agegt54               0.6639      0.504      1.318      0.188      -0.324       1.652
+q6:durable               1.1467      0.466      2.462      0.014       0.234       2.060
+agelt35:durable          0.0130      0.097      0.134      0.894      -0.178       0.204
+agelt35:lusd            -0.0561      0.083     -0.679      0.497      -0.218       0.106
+agelt35:husd             0.0175      0.092      0.190      0.849      -0.162       0.197
+agegt54:durable         -0.0134      0.155     -0.086      0.931      -0.318       0.291
+agegt54:lusd            -0.0236      0.130     -0.182      0.856      -0.278       0.231
+agegt54:husd            -0.2739      0.144     -1.906      0.057      -0.556       0.008
+durable:lusd             0.2916      0.103      2.821      0.005       0.089       0.494
+durable:husd             0.3027      0.124      2.437      0.015       0.059       0.546
+==============================================================================
+Omnibus:                     1646.671   Durbin-Watson:                   2.004
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              492.421
+Skew:                          -0.503   Prob(JB):                    1.18e-107
+Kurtosis:                       1.984   Cond. No.                         245.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+Number of regressors in the interactive model: 104 
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\arami\anaconda3\lib\site-packages\statsmodels\base\model.py:1832: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 103, but rank is 102
+  warnings.warn(&#39;covariance of constraints does not have full &#39;
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:               inuidur1   R-squared:                       0.073
+Model:                            OLS   Adj. R-squared:                  0.039
+Method:                 Least Squares   F-statistic:                     35.02
+Date:                Tue, 23 Apr 2024   Prob (F-statistic):               0.00
+Time:                        21:37:30   Log-Likelihood:                -9129.1
+No. Observations:                5782   AIC:                         1.866e+04
+Df Residuals:                    5579   BIC:                         2.002e+04
+Df Model:                         202                                         
+Covariance Type:                  HC1                                         
+================================================================================================
+                                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------------------------
+(Intercept)                      2.0557      0.021     99.243      0.000       2.015       2.096
+T2                              -0.0699      0.032     -2.179      0.029      -0.133      -0.007
+Xfemale                         -0.6663      0.408     -1.633      0.103      -1.466       0.134
+Xblack                          -0.8635      0.297     -2.908      0.004      -1.446      -0.281
+Xothrace                        -3.8177      0.937     -4.076      0.000      -5.654      -1.982
+Xfactor(dep)1                    0.0359      0.648      0.055      0.956      -1.234       1.306
+Xfactor(dep)2                    0.2118      0.451      0.469      0.639      -0.673       1.096
+Xq2                             -0.2546      0.455     -0.559      0.576      -1.147       0.638
+Xq3                             -0.6212      0.455     -1.365      0.172      -1.513       0.271
+Xq4                             -0.4799      0.456     -1.052      0.293      -1.374       0.414
+Xq5                             -0.3719      0.454     -0.819      0.413      -1.262       0.518
+Xq6                             -0.6770      0.452     -1.497      0.134      -1.563       0.209
+Xagelt35                        -0.6777      0.409     -1.655      0.098      -1.480       0.125
+Xagegt54                        -0.3041      0.701     -0.434      0.664      -1.678       1.069
+Xdurable                        -0.8380      0.596     -1.405      0.160      -2.007       0.331
+Xlusd                           -0.0995      0.228     -0.436      0.662      -0.546       0.347
+Xhusd                           -0.0626      0.235     -0.267      0.790      -0.523       0.398
+Xfemale:black                   -0.2155      0.151     -1.432      0.152      -0.511       0.080
+Xfemale:othrace                  0.5994      0.563      1.066      0.287      -0.503       1.702
+Xfemale:factor(dep)1            -0.1734      0.142     -1.222      0.222      -0.452       0.105
+Xfemale:factor(dep)2             0.2166      0.126      1.715      0.086      -0.031       0.464
+Xfemale:q2                       0.3919      0.407      0.964      0.335      -0.405       1.189
+Xfemale:q3                       0.6850      0.406      1.686      0.092      -0.112       1.482
+Xfemale:q4                       0.7214      0.406      1.776      0.076      -0.075       1.518
+Xfemale:q5                       0.5658      0.405      1.398      0.162      -0.228       1.359
+Xfemale:q6                       0.9082      0.430      2.110      0.035       0.064       1.752
+Xfemale:agelt35                  0.1701      0.095      1.789      0.074      -0.016       0.356
+Xfemale:agegt54                  0.2358      0.160      1.472      0.141      -0.078       0.550
+Xfemale:durable                  0.0974      0.138      0.708      0.479      -0.172       0.367
+Xfemale:lusd                     0.0720      0.107      0.676      0.499      -0.137       0.281
+Xfemale:husd                     0.0610      0.116      0.524      0.601      -0.167       0.289
+Xblack:factor(dep)1              0.1090      0.228      0.477      0.633      -0.339       0.557
+Xblack:factor(dep)2             -0.2007      0.228     -0.878      0.380      -0.649       0.247
+Xblack:q2                        0.4267      0.321      1.331      0.183      -0.202       1.055
+Xblack:q3                        0.3299      0.303      1.089      0.276      -0.264       0.924
+Xblack:q4                        0.5443      0.311      1.753      0.080      -0.064       1.153
+Xblack:q5                        0.6597      0.300      2.198      0.028       0.071       1.248
+Xblack:agelt35                   0.0830      0.158      0.524      0.600      -0.227       0.393
+Xblack:agegt54                   0.4230      0.255      1.660      0.097      -0.076       0.922
+Xblack:durable                   0.4681      0.227      2.058      0.040       0.022       0.914
+Xblack:lusd                      0.3086      0.184      1.674      0.094      -0.053       0.670
+Xblack:husd                      0.5498      0.660      0.834      0.405      -0.743       1.843
+Xothrace:factor(dep)1            2.5202      1.855      1.359      0.174      -1.116       6.157
+Xothrace:factor(dep)2            1.1889      0.573      2.074      0.038       0.065       2.312
+Xothrace:q2                      2.0826      0.608      3.423      0.001       0.890       3.275
+Xothrace:q3                      0.9373      0.660      1.420      0.156      -0.357       2.232
+Xothrace:q4                      3.8597      0.881      4.384      0.000       2.134       5.586
+Xothrace:q5                      0.9712      0.553      1.758      0.079      -0.112       2.054
+Xothrace:agelt35                 2.2480      0.915      2.456      0.014       0.453       4.043
+Xothrace:agegt54                -4.1490      0.482     -8.610      0.000      -5.094      -3.204
+Xothrace:durable                 1.7506      0.370      4.725      0.000       1.024       2.477
+Xothrace:lusd                   -0.6944      0.495     -1.402      0.161      -1.665       0.276
+Xothrace:husd                    4.7889      0.818      5.855      0.000       3.185       6.392
+Xfactor(dep)1:q2                 0.2339      0.642      0.365      0.715      -1.024       1.492
+Xfactor(dep)2:q2                -0.2177      0.448     -0.486      0.627      -1.096       0.661
+Xfactor(dep)1:q3                 0.1543      0.644      0.240      0.811      -1.108       1.416
+Xfactor(dep)2:q3                -0.2545      0.450     -0.565      0.572      -1.137       0.628
+Xfactor(dep)1:q4                -0.0239      0.642     -0.037      0.970      -1.283       1.235
+Xfactor(dep)2:q4                -0.1619      0.451     -0.359      0.720      -1.046       0.722
+Xfactor(dep)1:q5                 0.1396      0.638      0.219      0.827      -1.112       1.391
+Xfactor(dep)2:q5                -0.5626      0.449     -1.253      0.210      -1.443       0.317
+Xfactor(dep)1:q6                 0.4833      0.680      0.710      0.477      -0.850       1.817
+Xfactor(dep)2:q6                -0.0048      0.477     -0.010      0.992      -0.941       0.931
+Xfactor(dep)1:agelt35            0.0508      0.149      0.340      0.734      -0.242       0.343
+Xfactor(dep)2:agelt35            0.1192      0.116      1.026      0.305      -0.109       0.347
+Xfactor(dep)1:agegt54            0.0366      0.205      0.178      0.858      -0.366       0.439
+Xfactor(dep)2:agegt54            0.2231      0.421      0.530      0.596      -0.602       1.048
+Xfactor(dep)1:durable            0.3397      0.184      1.845      0.065      -0.021       0.701
+Xfactor(dep)2:durable            0.1147      0.153      0.748      0.454      -0.186       0.415
+Xfactor(dep)1:lusd              -0.2604      0.162     -1.609      0.108      -0.578       0.057
+Xfactor(dep)2:lusd               0.1151      0.140      0.823      0.411      -0.159       0.389
+Xfactor(dep)1:husd              -0.0428      0.166     -0.258      0.796      -0.368       0.282
+Xfactor(dep)2:husd               0.0180      0.151      0.119      0.905      -0.278       0.314
+Xq2:agelt35                      0.5007      0.410      1.222      0.222      -0.302       1.304
+Xq2:agegt54                      0.4322      0.698      0.619      0.536      -0.936       1.800
+Xq2:durable                      0.2615      0.593      0.441      0.659      -0.901       1.424
+Xq2:lusd                        -0.0675      0.231     -0.292      0.770      -0.520       0.385
+Xq2:husd                        -0.1818      0.234     -0.778      0.437      -0.640       0.276
+Xq3:agelt35                      0.5137      0.410      1.254      0.210      -0.290       1.317
+Xq3:agegt54                      0.7246      0.696      1.042      0.298      -0.639       2.088
+Xq3:durable                      0.7224      0.592      1.221      0.222      -0.438       1.883
+Xq3:lusd                        -0.0014      0.230     -0.006      0.995      -0.453       0.450
+Xq3:husd                         0.0989      0.232      0.427      0.669      -0.355       0.553
+Xq4:agelt35                      0.4048      0.410      0.988      0.323      -0.398       1.208
+Xq4:agegt54                      0.2469      0.694      0.356      0.722      -1.113       1.607
+Xq4:durable                      0.5938      0.598      0.993      0.321      -0.578       1.766
+Xq4:lusd                        -0.1686      0.232     -0.726      0.468      -0.624       0.287
+Xq4:husd                        -0.1451      0.235     -0.618      0.537      -0.605       0.315
+Xq5:agelt35                      0.2160      0.408      0.529      0.597      -0.584       1.016
+Xq5:agegt54                      0.0996      0.692      0.144      0.885      -1.256       1.456
+Xq5:durable                      0.8536      0.590      1.446      0.148      -0.304       2.011
+Xq5:lusd                        -0.2593      0.234     -1.108      0.268      -0.718       0.199
+Xq5:husd                        -0.1736      0.232     -0.749      0.454      -0.628       0.280
+Xq6:agelt35                      0.3824      0.434      0.881      0.379      -0.469       1.234
+Xq6:agegt54                      0.8362      0.728      1.149      0.251      -0.591       2.263
+Xq6:durable                      1.0289      0.618      1.664      0.096      -0.183       2.241
+Xagelt35:durable                -0.0027      0.126     -0.021      0.983      -0.249       0.243
+Xagelt35:lusd                   -0.0574      0.109     -0.525      0.600      -0.272       0.157
+Xagelt35:husd                    0.0545      0.126      0.434      0.664      -0.192       0.301
+Xagegt54:durable                -0.1239      0.207     -0.598      0.550      -0.530       0.283
+Xagegt54:lusd                    0.0912      0.176      0.519      0.604      -0.253       0.436
+Xagegt54:husd                   -0.3146      0.189     -1.662      0.097      -0.686       0.056
+Xdurable:lusd                    0.2634      0.138      1.911      0.056      -0.007       0.533
+Xdurable:husd                    0.3138      0.158      1.984      0.047       0.004       0.624
+T2TRUE:Xfemale                  -0.6598      0.550     -1.200      0.230      -1.738       0.418
+T2TRUE:Xblack                    0.4526      0.510      0.887      0.375      -0.548       1.453
+T2TRUE:Xothrace                  2.2115      1.102      2.007      0.045       0.051       4.372
+T2TRUE:Xfactor(dep)1             0.7636      0.785      0.972      0.331      -0.776       2.303
+T2TRUE:Xfactor(dep)2            -0.0512      0.779     -0.066      0.948      -1.578       1.475
+T2TRUE:Xq2                       0.8969      0.737      1.217      0.224      -0.548       2.342
+T2TRUE:Xq3                       0.8962      0.736      1.218      0.223      -0.546       2.338
+T2TRUE:Xq4                       0.5890      0.736      0.800      0.424      -0.854       2.032
+T2TRUE:Xq5                       0.7173      0.735      0.976      0.329      -0.723       2.158
+T2TRUE:Xq6                       0.7812      0.743      1.051      0.293      -0.676       2.239
+T2TRUE:Xagelt35                  1.1233      0.637      1.762      0.078      -0.126       2.373
+T2TRUE:Xagegt54                  0.4143      0.871      0.475      0.635      -1.294       2.123
+T2TRUE:Xdurable                  0.0699      0.851      0.082      0.935      -1.598       1.737
+T2TRUE:Xlusd                    -0.0864      0.361     -0.240      0.811      -0.794       0.621
+T2TRUE:Xhusd                     0.2846      0.399      0.713      0.476      -0.497       1.067
+T2TRUE:Xfemale:black            -0.2036      0.243     -0.837      0.403      -0.681       0.274
+T2TRUE:Xfemale:othrace          -0.9119      0.580     -1.572      0.116      -2.049       0.225
+T2TRUE:Xfemale:factor(dep)1      0.1813      0.220      0.826      0.409      -0.249       0.612
+T2TRUE:Xfemale:factor(dep)2     -0.4690      0.199     -2.360      0.018      -0.859      -0.079
+T2TRUE:Xfemale:q2                0.8485      0.549      1.545      0.122      -0.228       1.925
+T2TRUE:Xfemale:q3                1.0429      0.546      1.910      0.056      -0.028       2.113
+T2TRUE:Xfemale:q4                0.7825      0.546      1.434      0.152      -0.287       1.852
+T2TRUE:Xfemale:q5                0.8994      0.545      1.651      0.099      -0.169       1.967
+T2TRUE:Xfemale:q6                0.4086      0.604      0.677      0.499      -0.775       1.592
+T2TRUE:Xfemale:agelt35          -0.1861      0.146     -1.276      0.202      -0.472       0.100
+T2TRUE:Xfemale:agegt54          -0.3821      0.244     -1.564      0.118      -0.861       0.097
+T2TRUE:Xfemale:durable           0.1104      0.215      0.514      0.607      -0.310       0.531
+T2TRUE:Xfemale:lusd              0.1061      0.163      0.650      0.515      -0.214       0.426
+T2TRUE:Xfemale:husd             -0.0426      0.179     -0.239      0.811      -0.393       0.307
+T2TRUE:Xblack:factor(dep)1       0.3636      0.350      1.038      0.299      -0.323       1.050
+T2TRUE:Xblack:factor(dep)2       0.4284      0.338      1.266      0.206      -0.235       1.092
+T2TRUE:Xblack:q2                -0.5878      0.529     -1.112      0.266      -1.625       0.449
+T2TRUE:Xblack:q3                -0.0625      0.510     -0.123      0.902      -1.062       0.937
+T2TRUE:Xblack:q4                -0.4010      0.537     -0.747      0.455      -1.453       0.651
+T2TRUE:Xblack:q5                -0.4359      0.509     -0.856      0.392      -1.434       0.562
+T2TRUE:Xblack:agelt35           -0.2159      0.242     -0.893      0.372      -0.690       0.258
+T2TRUE:Xblack:agegt54           -0.2617      0.487     -0.538      0.591      -1.216       0.692
+T2TRUE:Xblack:durable           -0.8365      0.350     -2.387      0.017      -1.524      -0.149
+T2TRUE:Xblack:lusd              -0.4265      0.280     -1.525      0.127      -0.975       0.122
+T2TRUE:Xblack:husd              -0.1958      0.891     -0.220      0.826      -1.943       1.551
+T2TRUE:Xothrace:factor(dep)1     0.4788      1.895      0.253      0.801      -3.236       4.193
+T2TRUE:Xothrace:factor(dep)2    -4.4514      0.782     -5.695      0.000      -5.984      -2.919
+T2TRUE:Xothrace:q3              -0.7826      0.915     -0.856      0.392      -2.576       1.010
+T2TRUE:Xothrace:q4              -2.4173      1.144     -2.113      0.035      -4.660      -0.174
+T2TRUE:Xothrace:q5               0.7621      0.796      0.958      0.338      -0.798       2.322
+T2TRUE:Xothrace:agelt35         -3.8313      0.954     -4.017      0.000      -5.701      -1.962
+T2TRUE:Xothrace:durable          1.5659      0.462      3.388      0.001       0.660       2.472
+T2TRUE:Xothrace:lusd             2.0930      0.514      4.076      0.000       1.086       3.100
+T2TRUE:Xfactor(dep)1:q2         -0.8318      0.778     -1.069      0.285      -2.358       0.694
+T2TRUE:Xfactor(dep)2:q2          0.2249      0.778      0.289      0.773      -1.300       1.750
+T2TRUE:Xfactor(dep)1:q3         -0.8573      0.780     -1.099      0.272      -2.387       0.672
+T2TRUE:Xfactor(dep)2:q3          0.3587      0.775      0.463      0.644      -1.161       1.878
+T2TRUE:Xfactor(dep)1:q4         -0.6286      0.776     -0.810      0.418      -2.151       0.894
+T2TRUE:Xfactor(dep)2:q4          0.2390      0.774      0.309      0.758      -1.279       1.757
+T2TRUE:Xfactor(dep)1:q5         -0.8385      0.775     -1.082      0.279      -2.358       0.681
+T2TRUE:Xfactor(dep)2:q5          0.4285      0.774      0.553      0.580      -1.090       1.947
+T2TRUE:Xfactor(dep)1:q6         -1.5382      0.893     -1.722      0.085      -3.289       0.213
+T2TRUE:Xfactor(dep)2:q6          0.2847      0.818      0.348      0.728      -1.319       1.888
+T2TRUE:Xfactor(dep)1:agelt35    -0.0778      0.224     -0.347      0.729      -0.518       0.362
+T2TRUE:Xfactor(dep)2:agelt35    -0.1017      0.180     -0.564      0.573      -0.455       0.252
+T2TRUE:Xfactor(dep)1:agegt54    -0.2825      0.324     -0.873      0.383      -0.917       0.352
+T2TRUE:Xfactor(dep)2:agegt54     0.3793      0.571      0.664      0.507      -0.741       1.500
+T2TRUE:Xfactor(dep)1:durable    -0.2186      0.280     -0.779      0.436      -0.768       0.331
+T2TRUE:Xfactor(dep)2:durable    -0.0951      0.260     -0.366      0.715      -0.605       0.414
+T2TRUE:Xfactor(dep)1:lusd        0.2161      0.243      0.888      0.374      -0.261       0.693
+T2TRUE:Xfactor(dep)2:lusd       -0.2071      0.222     -0.933      0.351      -0.642       0.228
+T2TRUE:Xfactor(dep)1:husd        0.1232      0.268      0.460      0.646      -0.402       0.649
+T2TRUE:Xfactor(dep)2:husd        0.1580      0.230      0.686      0.493      -0.293       0.609
+T2TRUE:Xq2:agelt35              -1.2408      0.636     -1.952      0.051      -2.487       0.005
+T2TRUE:Xq2:agegt54              -0.6020      0.871     -0.691      0.489      -2.309       1.105
+T2TRUE:Xq2:durable              -0.0778      0.855     -0.091      0.928      -1.754       1.598
+T2TRUE:Xq2:lusd                  0.0508      0.367      0.138      0.890      -0.669       0.771
+T2TRUE:Xq2:husd                 -0.0920      0.395     -0.233      0.816      -0.866       0.682
+T2TRUE:Xq3:agelt35              -1.1278      0.636     -1.775      0.076      -2.374       0.118
+T2TRUE:Xq3:agegt54              -0.5411      0.862     -0.628      0.530      -2.231       1.149
+T2TRUE:Xq3:durable              -0.1956      0.855     -0.229      0.819      -1.872       1.481
+T2TRUE:Xq3:lusd                 -0.0740      0.361     -0.205      0.838      -0.781       0.633
+T2TRUE:Xq3:husd                 -0.5532      0.391     -1.414      0.157      -1.320       0.214
+T2TRUE:Xq4:agelt35              -0.9926      0.634     -1.565      0.118      -2.236       0.251
+T2TRUE:Xq4:agegt54               0.2122      0.852      0.249      0.803      -1.458       1.883
+T2TRUE:Xq4:durable              -0.1188      0.862     -0.138      0.890      -1.808       1.571
+T2TRUE:Xq4:lusd                  0.3042      0.366      0.831      0.406      -0.414       1.022
+T2TRUE:Xq4:husd                 -0.0828      0.393     -0.211      0.833      -0.852       0.687
+T2TRUE:Xq5:agelt35              -0.9263      0.633     -1.464      0.143      -2.167       0.314
+T2TRUE:Xq5:agegt54               0.2188      0.862      0.254      0.800      -1.471       1.909
+T2TRUE:Xq5:durable              -0.4451      0.852     -0.523      0.601      -2.115       1.225
+T2TRUE:Xq5:lusd                  0.0896      0.364      0.246      0.806      -0.625       0.804
+T2TRUE:Xq5:husd                 -0.2456      0.391     -0.629      0.529      -1.011       0.520
+T2TRUE:Xq6:agelt35              -0.7320      0.684     -1.070      0.285      -2.073       0.609
+T2TRUE:Xq6:agegt54              -0.4355      0.935     -0.466      0.641      -2.268       1.397
+T2TRUE:Xq6:durable              -0.1469      0.905     -0.162      0.871      -1.921       1.627
+T2TRUE:Xagelt35:durable          0.0216      0.201      0.108      0.914      -0.371       0.415
+T2TRUE:Xagelt35:lusd             0.0680      0.170      0.401      0.688      -0.264       0.400
+T2TRUE:Xagelt35:husd            -0.0587      0.186     -0.316      0.752      -0.423       0.305
+T2TRUE:Xagegt54:durable          0.1732      0.318      0.545      0.586      -0.450       0.796
+T2TRUE:Xagegt54:lusd            -0.1245      0.267     -0.467      0.641      -0.647       0.398
+T2TRUE:Xagegt54:husd             0.2899      0.296      0.979      0.328      -0.291       0.870
+T2TRUE:Xdurable:lusd             0.1281      0.212      0.605      0.545      -0.287       0.543
+T2TRUE:Xdurable:husd             0.0133      0.255      0.052      0.958      -0.487       0.514
+==============================================================================
+Omnibus:                     1349.401   Durbin-Watson:                   1.997
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              465.384
+Skew:                          -0.496   Prob(JB):                    8.77e-102
+Kurtosis:                       2.027   Cond. No.                         714.
+==============================================================================
+
+Notes:
+[1] Standard Errors are heteroscedasticity robust (HC1)
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\arami\anaconda3\lib\site-packages\statsmodels\base\model.py:1832: ValueWarning: covariance of constraints does not have full rank. The number of constraints is 202, but rank is 188
+  warnings.warn(&#39;covariance of constraints does not have full &#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>Using the 3. interactive regression adjustment (IRA) plot the coefficients of the next variables: T2<em>female, T2</em>black,T2<em>agelt35, T2</em>factor(dep)1</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ols_ira_res</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_html</span><span class="p">(</span><span class="n">ols_ira</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">as_html</span><span class="p">(),</span><span class="n">header</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">coef_df</span> <span class="o">=</span> <span class="n">ols_ira_res</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s1">&#39;T2TRUE:Xfemale&#39;</span><span class="p">,</span> <span class="s1">&#39;T2TRUE:Xblack&#39;</span><span class="p">,</span> <span class="s1">&#39;T2TRUE:Xagelt35&#39;</span><span class="p">,</span> <span class="s1">&#39;T2TRUE:Xfactor(dep)1&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">,</span> <span class="s1">&#39;std err&#39;</span><span class="p">]]</span>
+
+<span class="n">coef_df</span><span class="p">[</span><span class="s1">&#39;varname&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T2*female&#39;</span><span class="p">,</span> <span class="s1">&#39;T2*black&#39;</span><span class="p">,</span> <span class="s1">&#39;T2*agelt35&#39;</span><span class="p">,</span> <span class="s1">&#39;T2*factor(dep)1&#39;</span><span class="p">]</span>
+
+<span class="n">coef_df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>coef</th>
+      <th>std err</th>
+      <th>varname</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>T2TRUE:Xfemale</th>
+      <td>-0.6598</td>
+      <td>0.550</td>
+      <td>T2*female</td>
+    </tr>
+    <tr>
+      <th>T2TRUE:Xblack</th>
+      <td>0.4526</td>
+      <td>0.510</td>
+      <td>T2*black</td>
+    </tr>
+    <tr>
+      <th>T2TRUE:Xagelt35</th>
+      <td>1.1233</td>
+      <td>0.637</td>
+      <td>T2*agelt35</td>
+    </tr>
+    <tr>
+      <th>T2TRUE:Xfactor(dep)1</th>
+      <td>0.7636</td>
+      <td>0.785</td>
+      <td>T2*factor(dep)1</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">coef_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s1">&#39;varname&#39;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s1">&#39;coef&#39;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span>
+             <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span>
+             <span class="n">yerr</span><span class="o">=</span><span class="s1">&#39;std err&#39;</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">pd</span><span class="o">.</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">coef_df</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+           <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;s&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
+           <span class="n">y</span><span class="o">=</span><span class="n">coef_df</span><span class="p">[</span><span class="s1">&#39;coef&#39;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_ticks_position</span><span class="p">(</span><span class="s1">&#39;none&#39;</span><span class="p">)</span>
+<span class="n">_</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">([</span><span class="s1">&#39;T2*female&#39;</span><span class="p">,</span> <span class="s1">&#39;T2*Xblack&#39;</span><span class="p">,</span> <span class="s1">&#39;T2*agelt35&#39;</span><span class="p">,</span> <span class="s1">&#39;T2*factor(dep)1&#39;</span><span class="p">],</span>
+                       <span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-13-41a9ec4058d8&gt;:7: FutureWarning: The pandas.np module is deprecated and will be removed from pandas in a future version. Import numpy directly instead.
+  ax.scatter(x=pd.np.arange(coef_df.shape[0]),
+</pre></div>
+</div>
+<img alt="_images/b25e86b2280bfd95a180f2cdce941f59889a69a39611ffd84f93b0b8c3a4636f.png" src="_images/b25e86b2280bfd95a180f2cdce941f59889a69a39611ffd84f93b0b8c3a4636f.png" />
+</div>
+</div>
+<p>Comment this figure and give an explanation for the coefficients.</p>
+<p>This graph shows that the effect of receiving monetary compensation and being over 35 years of age affects the time of unemployment by 1.12 units. Likewise, the effect of receiving monetary compensation and being black affects unemployment time by 0.45 units. Furthermore, the effect of receiving monetary compensation and having at least one dependent affects the unemployment time by 0.76 units. Finally, the effect of receiving monetary compensation and being a woman negatively affects unemployment time by 0.66 units. But the coefficients of the interaction with being black and the number of dependents are not significant because the values of the confidence intervals can be zero.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Next we try out partialling out with lasso</span>
+<span class="o">!</span>pip<span class="w"> </span>install<span class="w"> </span>multiprocess
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">hdmpy</span> <span class="k">as</span> <span class="nn">hdm</span>
+<span class="c1"># Get data from R</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">pyreadr</span><span class="o">.</span><span class="n">read_r</span><span class="p">(</span><span class="s1">&#39;C:/Users/arami/Desktop/rlasso_ira_reg_g2.RData&#39;</span><span class="p">)</span>
+<span class="n">X_vars</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;S&#39;</span><span class="p">]</span>
+
+<span class="n">X_vars</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">hdm</span><span class="o">.</span><span class="n">rlassoEffects</span><span class="p">(</span> <span class="n">X_vars</span><span class="p">,</span> <span class="n">log_inuidur1</span><span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span> <span class="p">)</span>
+
+<span class="n">rlasso_ira</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span> <span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;se&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> \
+           <span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;pval&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span> <span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Coef.&#39;</span> <span class="p">,</span> \
+                            <span class="s2">&quot;Std.Err.&quot;</span> <span class="p">,</span> <span class="s2">&quot;t&quot;</span> <span class="p">,</span> <span class="s1">&#39;P&gt;|t|&#39;</span><span class="p">]</span> <span class="p">,</span> <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T2&#39;</span><span class="p">])</span>
+
+<span class="c1"># result.res is a object dictionary</span>
+<span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+<span class="n">result</span><span class="o">.</span><span class="n">res</span><span class="p">[</span><span class="s1">&#39;coefficients&#39;</span><span class="p">]</span>
+
+<span class="n">rlasso_ira</span>
+
+<span class="c1"># Results</span>
+<span class="n">table2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Coef.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cl</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_cra</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ols_ira</span><span class="o">.</span><span class="n">summary2</span><span class="p">()</span><span class="o">.</span><span class="n">tables</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+<span class="n">table2</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">rlasso_ira</span><span class="p">[</span><span class="s1">&#39;Std.Err.&#39;</span><span class="p">][</span><span class="s1">&#39;T2&#39;</span><span class="p">]</span>
+
+<span class="n">table2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">table2</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;CL&quot;</span><span class="p">,</span> <span class="s2">&quot;CRA&quot;</span><span class="p">,</span> <span class="s2">&quot;IRA&quot;</span><span class="p">,</span> <span class="s2">&quot;IRA Lasso&quot;</span><span class="p">],</span> \
+                      <span class="n">index</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;estimate&quot;</span><span class="p">,</span><span class="s2">&quot;standard error&quot;</span><span class="p">])</span>
+<span class="n">table2</span>
+
+<span class="n">table2</span><span class="o">.</span><span class="n">to_latex</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table2</span><span class="o">.</span><span class="n">to_latex</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>\begin{tabular}{lrrrr}
+\toprule
+{} &amp;        CL &amp;       CRA &amp;       IRA &amp;  IRA Lasso \\
+\midrule
+estimate       &amp; -0.078825 &amp; -0.071207 &amp; -0.069904 &amp;  -0.074574 \\
+standard error &amp;  0.032509 &amp;  0.032044 &amp;  0.032076 &amp;   0.032104 \\
+\bottomrule
+\end{tabular}
+</pre></div>
+</div>
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;ipython-input-16-4997f4719885&gt;:37: FutureWarning: In future versions `DataFrame.to_latex` is expected to utilise the base implementation of `Styler.to_latex` for formatting and rendering. The arguments signature may therefore change. It is recommended instead to use `DataFrame.style.to_latex` which also contains additional functionality.
+  print(table2.to_latex())
+</pre></div>
+</div>
+</div>
+</div>
+<p>Treatment group 2 experiences an average decrease of about  (7.4574)%  in the length of unemployment spell.</p>
+</section>
+</section>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="a-crash-course-in-good-and-bad-controls">
+<h1>A Crash Course in Good and Bad Controls<a class="headerlink" href="#a-crash-course-in-good-and-bad-controls" title="Link to this heading">#</a></h1>
+<p>In this section, we will cover various models that illustrate “good” and “bad” controls within statistical analyses. These terms refer to the effects of adding a variable to a regression model—whether such inclusion results in discrepancies or aids interpretation of the model. For a more detailed exploration of these concepts, you are encouraged to review the full text available in the technical report <a class="reference external" href="https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf">here</a>.</p>
+<p>#Good Controls 1 (blocking back-door paths)
+###MODEL 1
+In this case, we want to measure the effect of hours of study (<span class="math notranslate nohighlight">\(X\)</span>) on students’ academic performance as measured by final grades (<span class="math notranslate nohighlight">\(Y\)</span>). If we run the regression without taking into account nutrition (<span class="math notranslate nohighlight">\(Z\)</span>), which affects both <span class="math notranslate nohighlight">\(X\)</span> and <span class="math notranslate nohighlight">\(Y\)</span>, the coefficients will be biased. By including <span class="math notranslate nohighlight">\(Z\)</span> in the model, a cleaner effect of hours of study on final grades can be obtained, approaching 1, which is the true parameter ( <span class="math notranslate nohighlight">\(1.0088\approx1\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sprinkler</span> <span class="o">=</span> <span class="n">CausalGraphicalModel</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">],</span>
+                                 <span class="n">edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)])</span>
+<span class="n">sprinkler</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/740eee549b31af286943130dc83063c8bb668a1a3022b5b0c0f9dadbb85c7383.svg" src="_images/740eee549b31af286943130dc83063c8bb668a1a3022b5b0c0f9dadbb85c7383.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Seed</span>
+<span class="c1"># to make the results replicable (generating random numbers)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234567</span><span class="p">)</span>     <span class="c1"># set MC seed</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>              <span class="c1"># sample size</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Create dataframe</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regressions</span>
+<span class="n">no_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X&quot;</span>          <span class="c1">#Wrong, not controlling by nutrition</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X + Z&quot;</span>   <span class="c1"># Correct</span>
+
+<span class="n">no_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">no_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">using_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summary results</span>
+<span class="n">dfoutput</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">([</span><span class="n">no_control</span><span class="p">,</span><span class="n">using_control</span><span class="p">],</span><span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dfoutput</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================
+                  Y I       Y II  
+----------------------------------
+Intercept      0.0107    -0.0039  
+               (0.0351)  (0.0323) 
+X              1.3965*** 1.0088***
+               (0.0162)  (0.0323) 
+Z                        0.9710***
+                         (0.0718) 
+R-squared      0.8818    0.9001   
+R-squared Adj. 0.8816    0.8999   
+==================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>###Model 2
+In this case we want to see how much anti-corruption laws(<span class="math notranslate nohighlight">\(X\)</span>) affect the number of corruption cases(<span class="math notranslate nohighlight">\(Y\)</span>). But there is an unobservable variable that affects both, which is the feeling of injustice, which drives criminality and increases the number of laws. Then, we control for the number of active judges(<span class="math notranslate nohighlight">\(Z\)</span>) to clean up the effect of the unobservable on my X. Finally controlling, my coefficient is close to my variable (<span class="math notranslate nohighlight">\(0.4321\approx 0.5\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sprinkler</span> <span class="o">=</span> <span class="n">CausalGraphicalModel</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">],</span>
+                                 <span class="n">edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">),</span>
+                                        <span class="p">(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)],</span>
+                                 <span class="n">latent_edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)])</span>
+<span class="n">sprinkler</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/0fcfed204827ac6bc35f7def609b90d3bb2261c8e670a5f277733a0f5561cde0.svg" src="_images/0fcfed204827ac6bc35f7def609b90d3bb2261c8e670a5f277733a0f5561cde0.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Seed</span>
+<span class="c1"># to make the results replicable (generating random numbers)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234567</span><span class="p">)</span>     <span class="c1"># set MC seed</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c1"># sample size</span>
+<span class="n">U</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="mi">3</span><span class="o">*</span><span class="n">U</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># generate Z</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">X</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">U</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Create dataframe</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">U</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;U&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regressions</span>
+<span class="n">no_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X&quot;</span>           <span class="c1">#Wrong, not controlling for confounder</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X + Z&quot;</span>      <span class="c1">#classical</span>
+
+<span class="n">no_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">no_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">using_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summary results</span>
+<span class="n">dfoutput</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">([</span><span class="n">no_control</span><span class="p">,</span><span class="n">using_control</span><span class="p">],</span><span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dfoutput</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================
+                  Y I       Y II  
+----------------------------------
+Intercept      0.0348    0.0253   
+               (0.0434)  (0.0383) 
+X              1.0341*** 0.4321***
+               (0.0134)  (0.0375) 
+Z                        0.6671***
+                         (0.0394) 
+R-squared      0.8556    0.8878   
+R-squared Adj. 0.8555    0.8876   
+==================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Bad Control (M-bias)
+##MODEL 7
+Now, if we want to study how education(<span class="math notranslate nohighlight">\(X\)</span>) affects diabetes(<span class="math notranslate nohighlight">\(Y\)</span>) we could adjust for the mother’s diabetes status(<span class="math notranslate nohighlight">\(Z\)</span>) and consider it a confounder. However, this association is not direct, and adjusting for the mother will open up an association with income during childhood (U_1) and overall risk of diabetes (U_2).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sprinkler</span> <span class="o">=</span> <span class="n">CausalGraphicalModel</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">],</span>
+                                 <span class="n">edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)],</span>
+                                 <span class="n">latent_edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="s2">&quot;Z&quot;</span><span class="p">),(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)]</span>
+                                <span class="p">)</span>
+<span class="n">sprinkler</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/fced6b6e19ac4028b7a22ab4b94ebddf29bccca1c253b8c2c106adcbb9574b57.svg" src="_images/fced6b6e19ac4028b7a22ab4b94ebddf29bccca1c253b8c2c106adcbb9574b57.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Seed</span>
+<span class="c1"># to make the results replicable (generating random numbers)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345676</span><span class="p">)</span>     <span class="c1"># set MC seed</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c1"># sample size</span>
+<span class="n">U_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">U_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">U_1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">*</span><span class="n">U_2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># generate Z</span>
+<span class="n">X</span> <span class="o">=</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">U_1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mf">2.5</span><span class="o">*</span><span class="n">U_2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Create dataframe</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">U_1</span><span class="p">,</span><span class="n">U_2</span><span class="p">,</span> <span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;U_1&quot;</span><span class="p">,</span> <span class="s2">&quot;U_2&quot;</span><span class="p">,</span> <span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regressions</span>
+<span class="n">no_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X&quot;</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X + Z&quot;</span>      <span class="c1">#classical</span>
+
+<span class="n">no_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">no_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">using_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summary results</span>
+<span class="n">dfoutput</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">([</span><span class="n">no_control</span><span class="p">,</span><span class="n">using_control</span><span class="p">],</span><span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dfoutput</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================
+                  Y I       Y II  
+----------------------------------
+Intercept      0.0219    -0.0210  
+               (0.0850)  (0.0668) 
+X              1.0433*** 0.5338***
+               (0.0469)  (0.0422) 
+Z                        1.0602***
+                         (0.0426) 
+R-squared      0.3316    0.5875   
+R-squared Adj. 0.3310    0.5867   
+==================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Neutral Control (possibly good for precision)
+###Model 8
+In this case, we want to estimate how the introduction of a new smart learning programme (<span class="math notranslate nohighlight">\(X\)</span>) affects the academic performance of students (<span class="math notranslate nohighlight">\(Y\)</span>). When we run this regression, our estimator is unbiased. However, if we include the attendance rate (<span class="math notranslate nohighlight">\(Z\)</span>), which also affects performance, we can increase the precision of the estimator and still remain unbiased and increase the precision.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sprinkler</span> <span class="o">=</span> <span class="n">CausalGraphicalModel</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">],</span>
+                                 <span class="n">edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">),(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)])</span>
+<span class="n">sprinkler</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/e9b45fb7b54ae116360638a5c346ab091893c5166fe4fb68e34365d8a47d2dd6.svg" src="_images/e9b45fb7b54ae116360638a5c346ab091893c5166fe4fb68e34365d8a47d2dd6.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Seed</span>
+<span class="c1"># to make the results replicable (generating random numbers)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12345676</span><span class="p">)</span>     <span class="c1"># set MC seed</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c1"># sample size</span>
+
+<span class="n">Z</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">+</span> <span class="mf">1.5</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Create dataframe</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regressions</span>
+<span class="n">no_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X&quot;</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X + Z&quot;</span>      <span class="c1">#classical</span>
+
+<span class="n">no_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">no_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">using_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summary results</span>
+<span class="n">dfoutput</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">([</span><span class="n">no_control</span><span class="p">,</span><span class="n">using_control</span><span class="p">],</span><span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dfoutput</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================
+                  Y I       Y II  
+----------------------------------
+Intercept      0.1056*   0.0001   
+               (0.0578)  (0.0327) 
+X              1.0865*** 1.0192***
+               (0.0578)  (0.0327) 
+Z                        1.5158***
+                         (0.0329) 
+R-squared      0.2616    0.7642   
+R-squared Adj. 0.2608    0.7638   
+==================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01
+</pre></div>
+</div>
+</div>
+</div>
+<p>#Bad Controls (Overcontrol Bias)
+##Model 11
+In this case we want to analyse how the growth of the city in terms of urban infrastructure (residential areas, shopping centres, etc.) impacts on the level of vehicle congestion (<span class="math notranslate nohighlight">\(Y\)</span>). Now, if we add a variable such as the number of cars (<span class="math notranslate nohighlight">\(Z\)</span>) that is affected by the infrastructure, but not vice versa and that causes a higher level of congestion, we would be removing the explanatory power of <span class="math notranslate nohighlight">\(X\)</span>. Now by controlling for both variables, the estimator of X loses significance and moves away from its true estimator (<span class="math notranslate nohighlight">\(-0.022\neq1\)</span>).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sprinkler</span> <span class="o">=</span> <span class="n">CausalGraphicalModel</span><span class="p">(</span><span class="n">nodes</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">,</span><span class="s2">&quot;X&quot;</span><span class="p">],</span>
+                                 <span class="n">edges</span><span class="o">=</span><span class="p">[(</span><span class="s2">&quot;X&quot;</span><span class="p">,</span><span class="s2">&quot;Z&quot;</span><span class="p">),(</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span><span class="s2">&quot;Y&quot;</span><span class="p">)])</span>
+<span class="n">sprinkler</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/1da63348ee133021bf341219164cdb282be3eddb2a5b6e274f99a56e8bf1edff.svg" src="_images/1da63348ee133021bf341219164cdb282be3eddb2a5b6e274f99a56e8bf1edff.svg" /></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Set Seed</span>
+<span class="c1"># to make the results replicable (generating random numbers)</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1234567</span><span class="p">)</span>     <span class="c1"># set MC seed</span>
+
+<span class="n">n</span> <span class="o">=</span> <span class="mi">1000</span>                <span class="c1"># sample size</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="c1"># generate Z</span>
+<span class="n">Z</span> <span class="o">=</span> <span class="mf">1.3</span><span class="o">*</span><span class="n">X</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="mi">1</span><span class="o">*</span><span class="n">Z</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="c1"># Create dataframe</span>
+<span class="n">D</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">Z</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">))</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Z&quot;</span><span class="p">,</span> <span class="s2">&quot;X&quot;</span><span class="p">,</span> <span class="s2">&quot;Y&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Regressions</span>
+<span class="n">no_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X&quot;</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="s2">&quot;Y ~ X + Z&quot;</span>      <span class="c1">#classical</span>
+
+<span class="n">no_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">no_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">using_control</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="n">using_control</span> <span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+
+<span class="c1"># Summary results</span>
+<span class="n">dfoutput</span> <span class="o">=</span> <span class="n">summary_col</span><span class="p">([</span><span class="n">no_control</span><span class="p">,</span><span class="n">using_control</span><span class="p">],</span><span class="n">stars</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dfoutput</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>==================================
+                  Y I       Y II  
+----------------------------------
+Intercept      -0.0204   -0.0039  
+               (0.0455)  (0.0323) 
+X              1.2604*** -0.0229  
+               (0.0465)  (0.0527) 
+Z                        1.0088***
+                         (0.0323) 
+R-squared      0.4239    0.7089   
+R-squared Adj. 0.4233    0.7083   
+==================================
+Standard errors in parentheses.
+* p&lt;.1, ** p&lt;.05, ***p&lt;.01
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="group1_lab1_python.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">An inferential problem: The Gender Wage Gap</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="group1_lab3_python.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Proving Neyman Orthogonality</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">Multicollinearity</a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mathematical-explanation">Mathematical Explanation</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#normal-equation">Normal Equation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#why-mathbf-x-mathbf-x-becomes-non-invertible">Why <span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span> Becomes Non-invertible</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#covariance-matrix-mathbf-x-mathbf-x">Covariance Matrix (<span class="math notranslate nohighlight">\(\mathbf{X}´\mathbf{X}\)</span>)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#testing-for-invertibility">Testing for invertibility</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#a-crash-course-in-good-and-bad-controls">A Crash Course in Good and Bad Controls</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Josue Maguiña
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
